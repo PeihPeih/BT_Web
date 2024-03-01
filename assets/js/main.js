@@ -57,3 +57,7 @@ checkCondition = (condition) => {
   })
   return false;
 }
+
+checkFilter = (element, condition)=>{
+  for()
+}

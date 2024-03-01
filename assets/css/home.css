@@ -150,6 +150,11 @@ a{
 
 .card{
   padding: 20px;
+  height: 40vh;
+}
+
+.card .info{
+  height: 80%;
 }
 
 .card .name, .card .describe, .card .question{
@@ -162,7 +167,6 @@ a{
 }
 
 .card .do{
-  margin-top: 60px;
   width: 100%;
   padding: 10px 0;
   font-size: 1.1rem;
