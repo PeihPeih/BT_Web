@@ -88,6 +88,7 @@ function handleQuestionType(questionForm, questionType) {
         addAnswerBtn = document.createElement("button")
         addAnswerBtn.className = "add-answer-btn"
         addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>'
+        addAnswerBtn.type = "button"
 
         addAnswerBtn.onclick = function () {
             addAnswer(answersChoiceForm, answerLabel.textContent);
@@ -118,6 +119,12 @@ function addAnswer(answersChoiceForm, previousLabel) {
     addAnswerBtn = document.createElement("button")
     addAnswerBtn.className = "add-answer-btn"
     addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>'
+    addAnswerBtn.type = "button"
+
+    addAnswerBtn = document.createElement("button")
+    addAnswerBtn.className = "add-answer-btn"
+    addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>'
+    addAnswerBtn.type = "button"
 
     addAnswerBtn.onclick = function () {
         addAnswer(answersChoiceForm, answerLabel.textContent);
