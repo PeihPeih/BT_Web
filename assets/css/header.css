@@ -1,0 +1,37 @@
+/*------------------ Header ----------------------*/
+#header{
+  height: 10vh;
+  background-color: #ad171c;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vw;
+  align-items: center;
+}
+
+#header a{
+  font-size: 1.2rem;
+  color:#fff;
+  font-weight: bold;
+}
+
+#header .logo{
+  background-color: #fff;
+  width: 6vh;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#header .logo img{
+  width: 70%;
+  height: 70%;
+}
+
+#navbar li{
+  list-style-type: none;
+  display: flex;
+  column-gap: 1.2rem;
+}
