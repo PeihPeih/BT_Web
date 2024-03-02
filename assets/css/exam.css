@@ -44,23 +44,26 @@ main{
 
 main .work{
   background-color: #fff;
-  height: 80vh;
   width: 75vw;
   margin:0 0 20px 10px;
   border-radius: 10px;
   border: 1px solid #cfcece;
     box-shadow: 0 3px 0 0 rgba(0,0,0,0.15);
-
+  position: relative;
 }
 
-.work .qanda{
-  padding: 20px; 
-  height: 95%;
+.work #form{
+  padding: 20px;  
+}
+
+
+.qanda .question{
+  margin-top: 20px;
 }
 
 .qanda .answer{
   margin-top: 10px;
-  align-items: center;
+  margin-left: 20px;
 }
 
 .work .next{
@@ -71,6 +74,9 @@ main .work{
   border: none;
   text-transform: uppercase;
   color:#ad171c;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 
 main .help{
@@ -129,9 +135,17 @@ main .help_wrapper{
 
 .num_qa button{
   padding:12px 0;
-  font-size: 0.8rem;
-  background-color: transparent;
+  font-size: 1rem;
+  background-color: #fff;
   border-radius: 5px;
   border: 1px solid #000;
   cursor: pointer;
+  margin-bottom: 10px;
+  transition: none;
+}
+
+.num_qa button.selected{
+  border: none;
+  background-color: #ad171c;
+  color: #fff;
 }
