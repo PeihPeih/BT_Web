@@ -81,6 +81,7 @@ submitExam = (question) => {
     if(checkFullSelected(question)) {
       form.submit();
       window.alert("Bạn đã nộp bài!")
+      window.location.href = "result.html";
     }
     else{
       window.alert("Vui lòng trả lời hết các câu hỏi!")
