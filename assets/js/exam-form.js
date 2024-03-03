@@ -1,3 +1,8 @@
+function numberToLetter(number) {
+    const letter = String.fromCharCode(65 + number);
+    return letter;
+}
+
 function handleExamType() {
     chooseExamBox = document.querySelector("#exam-type")
     examType = chooseExamBox.value
@@ -68,72 +73,67 @@ function addQuestionForm() {
 }
 
 function handleQuestionType(questionForm, questionType) {
-    console.log(questionType);
-    answersChoiceForm = questionForm.querySelector(".answers-choice-form")
-    console.log(typeof (answersChoiceForm))
-    if (questionType == "Trắc nghiệm") {
-
-        var divBox = document.createElement("div")
-        divBox.id = 'answers-area'
-
-        answerLabel = document.createElement("label")
-        answerLabel.textContent = "A."
-        answerLabel.style.padding = "10px"
-        divBox.appendChild(answerLabel);
-
-        textAnswer = document.createElement("textarea")
-        textAnswer.className = "text-answer"
-        divBox.appendChild(textAnswer)
-
-        addAnswerBtn = document.createElement("button")
-        addAnswerBtn.className = "add-answer-btn"
-        addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>'
-        addAnswerBtn.type = "button"
-
-        addAnswerBtn.onclick = function () {
-            addAnswer(answersChoiceForm, answerLabel.textContent);
-        }
-
-        divBox.appendChild(addAnswerBtn)
-
-        answersChoiceForm.appendChild(divBox)
-
-        // answerDesc = document.createElement("textarea");
-        // answersChoiceForm.appendChild(answerDesc);
+    answersChoiceForm = questionForm.querySelector(".answers-choice-form");
+    // console.log(typeof (answersChoiceForm))
+    if (questionType == "Trắc nghiệm" || questionType == "Nhiều đáp án") {
+        addAnswer(answersChoiceForm);
+    } else {
+        const choiceItems = answersChoiceForm.querySelectorAll('div');
+        choiceItems.forEach((item) => {
+            answersChoiceForm.removeChild(item);
+        })
     }
 }
 
-function addAnswer(answersChoiceForm, previousLabel) {
-    var divBox = document.createElement("div")
-    divBox.id = 'answers-area'
+function addAnswer(answersChoiceForm) {
+
+    const choiceItems = answersChoiceForm.querySelectorAll('div');
+    const cnt = choiceItems.length
+
+    var divBox = document.createElement("div");
+    divBox.id = 'answers-area';
 
     answerLabel = document.createElement("label")
-    answerLabel.textContent = "A."
-    answerLabel.style.padding = "10px"
+    answerLabel.textContent = numberToLetter(cnt) + ".";
+    answerLabel.style.padding = "10px";
     divBox.appendChild(answerLabel);
 
-    textAnswer = document.createElement("textarea")
-    textAnswer.className = "text-answer"
-    divBox.appendChild(textAnswer)
+    textAnswer = document.createElement("textarea");
+    textAnswer.className = "text-answer";
+    divBox.appendChild(textAnswer);
 
-    addAnswerBtn = document.createElement("button")
+    addAnswerBtn = document.createElement("button");
     addAnswerBtn.className = "add-answer-btn"
-    addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>'
-    addAnswerBtn.type = "button"
+    addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>';
+    addAnswerBtn.type = "button";
 
-    addAnswerBtn = document.createElement("button")
-    addAnswerBtn.className = "add-answer-btn"
-    addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>'
-    addAnswerBtn.type = "button"
-
+    addAnswerBtn = document.createElement("button");
+    addAnswerBtn.className = "add-answer-btn";
+    addAnswerBtn.innerHTML = '<i class= "fa-solid fa-plus"></i>';
+    addAnswerBtn.type = "button";
     addAnswerBtn.onclick = function () {
-        addAnswer(answersChoiceForm, answerLabel.textContent);
-    }
+        addAnswer(answersChoiceForm);
+    };
+    divBox.appendChild(addAnswerBtn);
 
-    divBox.appendChild(addAnswerBtn)
+    removeAnswerBtn = document.createElement("button");
+    removeAnswerBtn.className = "remove-answer-btn";
+    removeAnswerBtn.innerHTML = '<i class="fa-solid fa-minus"></i>';
+    removeAnswerBtn.type = "button";
+    removeAnswerBtn.onclick = function () {
+        answersChoiceForm.removeChild(divBox);
+        const items = answersChoiceForm.querySelectorAll('div');
+        items.forEach((item, index) => {
+            answerLabel = item.querySelector("label");
+            answerLabel.textContent = numberToLetter(index) + ".";
+        })
+    };
 
-    answersChoiceForm.appendChild(divBox)
+    divBox.appendChild(removeAnswerBtn);
+
+    answersChoiceForm.appendChild(divBox);
 }
+
 
 function removeQuestion(questionForm) {
     var questionList = document.getElementById("question-list");
