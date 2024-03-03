@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tạo/Chỉnh sửa Kỳ thi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/exam-form.css">
+</head>
+
+<body>
+    <form id="exam-form">
+
+        <h1>Tạo Kỳ Thi</h1>
+        <label for="exam-name">Tên kỳ thi:</label><br>
+        <input type="text" id="exam-name" name="exam-name"><br>
+
+        <label for="description">Mô tả:</label><br>
+        <textarea id="description" name="description"></textarea><br>
+
+        <label for="exam-type">Loại kỳ thi:</label><br>
+        <select id="exam-type" name="exam-type" onchange="handleExamType()">
+            <option value="tinh gio">Tính giờ</option>
+            <option value="tu do">Tự do</option>
+        </select><br>
+
+        <div id="time-input">
+            <label for="exam-time">Thời gian kỳ thi (phút):</label><br>
+            <input type="number" id="exam-time" name="exam-time"><br>
+        </div>
+
+
+        <div id="question-list"></div>
+
+        <div id="add-question-container">
+            <button type="button" onclick="addQuestionForm()">Thêm câu hỏi</button><br>
+        </div>
+
+        <!-- <label for="file-upload">Nhập đề thi từ file Excel:</label><br> -->
+        <!-- <input type="file" id="file-upload" name="file-upload"><br> -->
+        <div id="question-list"></div>
+
+        <button type="submit">Lưu</button>
+    </form>
+
+    <script src="./assets//js/exam-form.js"></script>
+</body>
+
+</html>
