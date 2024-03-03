@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  #filter {
+    margin-bottom: 20px;
+  }
+  
+  #statistics {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #statistics th, #statistics td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  #statistics th {
+    background-color:#ad171c;
+    color: #fff;
+  }
+  
+  #exportPDF, #exportExcel {
+    margin-top: 20px;
+  }
+  .submit-btn{
+    width: auto;
+    background-color: #fff;
+    padding: 8px 8px;
+    font-size: 1rem;
+    border: 1px solid #ad171c;
+    border-radius: 5px;
+    color: #ad171c;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 20px 0px;
+    cursor: pointer;
+  }
+  
+.submit-btn:hover{
+    background-color: #ad171c;
+    color: #fff;
+  }
+
+
+.tableHeader {
+  background-color: #ad171c;
+  color: #fff;
+}

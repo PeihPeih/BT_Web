@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trang Thống kê</title>
+  <link rel="stylesheet" type="text/css" href="assets\css\statistics.css">
+  <link rel="stylesheet" href="./assets/css/header.css">
+</head>
+<body>
+  <!--Header-->
+  <header id="header">
+    <div class="logo">
+      <img src="./assets/img/logo_ptit.png" alt="">
+    </div>
+    
+    <nav id="navbar">
+      <li>
+        <ul><a href="#">Khóa học</a></ul>
+        <ul><a href="#">Đề thi online</a></ul>
+        <ul><a href="#">Tuyển sinh</a></ul>
+      </li>
+    </nav>
+
+    <div class="signin">
+      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng nhập</a>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <h1>Trang Thống kê</h1>
+  
+  <div id="filter">
+    <label for="exam">Kỳ thi:</label>
+    <select id="exam">
+      <option value="all">Tất cả</option>
+      <option value="exam1">Kỳ thi 1</option>
+      <option value="exam2">Kỳ thi 2</option>
+      <option value="exam3">Kỳ thi 3</option>
+    </select>
+  </div>
+
+  <table id="statistics">
+    <thead>
+      <tr>
+        <th>Tổng số lần tham gia</th>
+        <th>Tỷ lệ hoàn thành</th>
+        <th>Điểm trung bình</th>
+        <th>Phân phối điểm số</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="totalAttempts">0</td>
+        <td id="completionRate">0%</td>
+        <td id="averageScore">0</td>
+        <td id="scoreDistribution"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button id="exportPDF" class="submit-btn">Xuất PDF</button>
+  <button id="exportExcel" class="submit-btn">Xuất Excel</button>
+  <br>
+  <button id="backDashboard" class="submit-btn" onclick="location.href = 'dashboard_admin.html'">Quay lại trang Dashboard</button>
+
+  <script src="assets\js\statistics.js"></script>
+</body>
+</html>
