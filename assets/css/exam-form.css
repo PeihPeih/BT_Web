@@ -180,3 +180,19 @@ button:hover {
     left: 50%;
     transform: translate(-50%, -50%)
 }
+
+
+.new-question-form #answers-area .remove-answer-btn {
+    position: relative;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+}
+
+
+.new-question-form #answers-area .remove-answer-btn>i {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
