@@ -1,0 +1,260 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f2f3f7;
+}
+
+#header {
+    height: 10vh;
+    background-color: #ad171c;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5vw;
+    align-items: center;
+}
+
+#header a {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#header .logo {
+    background-color: #fff;
+    width: 6vh;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#header .logo img {
+    width: 70%;
+    height: 70%;
+}
+
+#navbar li {
+    list-style-type: none;
+    display: flex;
+    column-gap: 1.2rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#exam-form {
+    margin: 20px auto;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#description {
+    height: 100px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#time-input {
+    display: block;
+}
+
+button {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #0073aa;
+}
+
+#add-question-container {
+    text-align: center;
+    margin: 20px
+}
+
+.file-upload {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-upload input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.file-upload:hover {
+    background-color: #45a049;
+}
+
+.new-question-form {
+    margin-top: 20px;
+    /* Khoảng cách giữa các form */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.new-question-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.new-question-form input[type="text"],
+.new-question-form textarea,
+.new-question-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.new-question-form textarea {
+    height: 100px;
+}
+
+.new-question-form button[type="button"],
+.new-question-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.new-question-form button[type="button"]:hover,
+.new-question-form button:hover {
+    background-color: #45a049;
+}
+
+.new-question-form #add-answers {
+    margin-bottom: 10px;
+}
+
+.new-question-form #remove-btn {
+    background-color: red;
+    margin-left: auto
+}
+
+.new-question-form #answers-area {
+    display: flex;
+    align-items: center;
+}
+
+
+.new-question-form #answers-area .text-answer {
+    height: 100%;
+    font-size: 15px;
+    padding-top: 20px
+}
+
+
+.new-question-form #answers-area .add-answer-btn {
+    position: relative;
+    height: 10px;
+    width: 10px;
+    margin: 15px;
+}
+
+.new-question-form #answers-area .add-answer-btn>i {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+
+.new-question-form #answers-area .remove-answer-btn {
+    position: relative;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+}
+
+
+.new-question-form #answers-area .remove-answer-btn>i {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+
+#footer {
+    display: flex;
+    bottom: 0px;
+    height: 150px;
+    width: 100%;
+    padding-top: 10px;
+    background-color: #ad171c;
+    align-items: center;
+    flex-direction: column;
+}
+
+#footer p {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.disappear {
+    display: none;
+}
