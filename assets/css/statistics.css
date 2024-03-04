@@ -53,3 +53,19 @@ body {
   background-color: #ad171c;
   color: #fff;
 }
+
+#footer {
+  display: flex;
+  bottom: 0px;
+  height: 150px;
+  width: 100%;
+  padding-top: 10px;
+  background-color: #ad171c;
+  align-items: center;
+  flex-direction: column;
+}
+
+#footer p {
+  color: #fff;
+  margin-bottom: 10px;
+}
