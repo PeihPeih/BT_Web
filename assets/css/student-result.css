@@ -1,3 +1,42 @@
+
+#header {
+    height: 10vh;
+    background-color: #ad171c;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5vw;
+    align-items: center;
+}
+
+#header a {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#header .logo {
+    background-color: #fff;
+    width: 6vh;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#header .logo img {
+    width: 70%;
+    height: 70%;
+}
+
+#navbar li {
+    list-style-type: none;
+    display: flex;
+    column-gap: 1.2rem;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,6 +46,8 @@ body {
 
 .container {
     max-width: 600px;
+
+    min-height: 500px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
@@ -72,4 +113,44 @@ td {
 
 th {
     background-color: #f2f2f2;
+
+    text-align: center;
+}
+
+td:nth-child(1),
+td:nth-child(3) {
+    text-align: center;
+}
+
+.to-csv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.to-csv>label {
+    padding: 5px;
+}
+
+/* ----------------- Footer ---------------- */
+
+#footer {
+    display: flex;
+    bottom: 0px;
+    height: 150px;
+    width: 100%;
+    padding-top: 10px;
+    background-color: #ad171c;
+    align-items: center;
+    flex-direction: column;
+}
+
+#footer p {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.disappear {
+    display: none;
 }
