@@ -2,7 +2,6 @@ document.getElementById("search-form").addEventListener("submit", function (even
     event.preventDefault();
     var studentId = document.getElementById("student-id").value;
     var resultDiv = document.getElementById("result");
-    // Assume data is fetched from database or API
     var studentData = {
         "B21DCCN001": { name: "Nguyễn Văn A", id: "B21DCCN001" },
         "B21DCCN002": { name: "Trần Thị B", id: "B21DCCN002" },
@@ -39,8 +38,6 @@ document.getElementById("search-form").addEventListener("submit", function (even
 
         toCSV.appendChild(toCSVBtn);
         toCSV.appendChild(toCSVLabel);
-
-        console.log(toCSV.innerHTML);
 
         resultDiv.innerHTML += table;
         resultDiv.appendChild(toCSV);
