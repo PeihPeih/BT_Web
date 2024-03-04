@@ -72,4 +72,21 @@ td {
 
 th {
     background-color: #f2f2f2;
+    text-align: center;
+}
+
+td:nth-child(1),
+td:nth-child(3) {
+    text-align: center;
+}
+
+.to-csv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.to-csv>label {
+    padding: 5px;
 }
