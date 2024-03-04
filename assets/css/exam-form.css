@@ -51,6 +51,7 @@ form {
     margin: 0 auto;
 }
 
+
 #exam-form {
     margin: 20px auto;
 }
@@ -100,6 +101,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
     margin: 10px;
 }
 
@@ -236,7 +238,6 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%)
-}
 
 
 #footer {
