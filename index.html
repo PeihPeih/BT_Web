@@ -26,7 +26,7 @@
     </nav>
 
     <div class="signin">
-      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng nhập</a>
+      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
     </div>
   </header>
 
@@ -43,23 +43,13 @@
             <label for="type_exam">Loại kỳ thi</label>
             <select name="type_exam" id="type_exam">
               <option value="" disabled selected hidden></option>
-              <option value="Luyện tập">Luyện tập</option>
-              <option value="Giữa kì">Giữa kì</option>
-              <option value="Cuối kì">Cuối kì</option>
-              <option value="Tất cả">Tất cả</option>
             </select>
           </div>
           <div class="_input">
-            <label for="status">Trạng thái</label>
-            <select name="status" id="status">
-              <option value="" disabled selected hidden></option>
-              <option value="Tự do">Tự do</option>
-              <option value="Thời gian cụ thể">Thời gian cụ thể</option>
-            </select>
+            
           </div>
           <div class="_input">
-            <label for="subject">Tên môn học</label>
-            <input id="subject" type="text" placeholder="Nhập môn học bạn muốn kiểm tra: ..."> 
+            
           </div>
         </div>
         <button class="search" type="submit">Tìm kiếm <i class="fa-solid fa-magnifying-glass"></i></button>
@@ -70,114 +60,9 @@
         <p>Tất cả</p>
       </div>
       <div class="cards_wrapper">
-        <div class="container" type = "Luyện tập, Tự do, Toán rời rạc">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Toán rời rạc Test 1</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-         <div class="container" type = "Giữa kì, Tự do, Lập trình Web">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Lập trình Web Test 1</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-         <div class="container" type = "Luyện tập, Thời gian cụ thể, Nhập môn trí tuệ nhân tạo">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Nhập môn trí tuệ nhân tạo Test 1</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-        <div class="container" type = "Cuối kì, Tự do, Toán rời rạc">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Toán rời rạc Test 2</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-        <div class="container"type = "Giữa kì, Tự do, Lập trình Web">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Lập trình Web Test 2</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-        <div class="container" type = "Luyện tập, Tự do, Nhập môn trí tuệ nhân tạo">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Nhập môn trí tuệ nhân tạo Test 2</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-        <div class="container" type = "Cuối kì, Thời gian cụ thể, Lập trình Web">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Lập trình Web Test 3</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-        <div class="container"type = "Giữa kì, Thời gian cụ thể, Nhập môn trí tuệ nhân tạo">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Nhập môn trí tuệ nhân tạo Test 3</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-        <div class="container" type = "Luyện tập, Tự do, Nhập môn trí tuệ nhân tạo">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Nhập môn trí tuệ nhân tạo Test 4</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
-        <div class="container" type = "Cuối kì, Thời gian cụ thể, Toán rời rạc">
-          <div class="card">
-            <div class="info">
-              <h3 class="name">Toán rời rạc Test 3</h3>
-              <p class="describe"><i class="fa-regular fa-clock"></i> 60 phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
-              <p class="question">40 câu hỏi</p>
-            </div>
-            <a href="exam.html" class="do">Làm bài</a>
-          </div>
-        </div>
+        
       </div>
       <nav class="num_pages">
-        <button class = "selected"><a href="#">1</a></button>
-        <button><a href="#">2</a></button>
-        <button><a href="#">3</a></button>
-        <button><a href="#">4</a></button>
-        <button><a href="#">5</a></button>
-        <button><a href="#"><i class="fa-solid fa-chevron-right"></i></a></button>
       </nav>
     </section>
     <section class="banner">

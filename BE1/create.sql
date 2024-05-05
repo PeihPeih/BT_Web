@@ -1,0 +1,16 @@
+create table answer (answer_sheet_id bigint, id bigint not null auto_increment, question_id bigint, choices varchar(255), primary key (id)) engine=InnoDB;
+create table answer_sheet (result integer, exam_id bigint, id bigint not null auto_increment, user_id bigint, primary key (id)) engine=InnoDB;
+create table exam (id bigint not null auto_increment, time_end datetime(6), time_start datetime(6), name varchar(255), type varchar(255), primary key (id)) engine=InnoDB;
+create table question (exam_id bigint, id bigint not null auto_increment, question_type_id bigint, choices varchar(255), content varchar(255), correct_answer varchar(255), primary key (id)) engine=InnoDB;
+create table question_type (id bigint not null auto_increment, name varchar(255), primary key (id)) engine=InnoDB;
+create table role (role_id bigint not null, authority varchar(255), primary key (role_id)) engine=InnoDB;
+create table role_seq (next_val bigint) engine=InnoDB;
+insert into role_seq values ( 1 );
+create table user (user_id bigint not null, password varchar(255), username varchar(255), primary key (user_id)) engine=InnoDB;
+create table user_role (role_id bigint not null, user_id bigint not null, primary key (role_id, user_id)) engine=InnoDB;
+create table user_seq (next_val bigint) engine=InnoDB;
+insert into user_seq values ( 1 );
+alter table question add constraint FKhupso6ldavcx993tfnrjsdl1p foreign key (exam_id) references exam (id);
+alter table question add constraint FK7svspov4rexjawqdvi2jni81u foreign key (question_type_id) references question_type (id);
+alter table user_role add constraint FKa68196081fvovjhkek5m97n3y foreign key (role_id) references role (role_id);
+alter table user_role add constraint FK859n2jvi8ivhui0rl0esws6o foreign key (user_id) references user (user_id);

@@ -21,12 +21,6 @@ createCheckAnswer = (stt) => {
 }
 
 
-
-
-
-
-
-
 // Checkbox selected answer
 checkSelectedAnswer = ()=>{
   const questions = document.getElementsByClassName('question');
