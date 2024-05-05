@@ -48,27 +48,27 @@ createExamForm = (id, type, name, startTime, endTime) => {
   const cardWrapper = document.querySelector('.cards_wrapper');
   if (id >= 6 && cardWrapper.querySelectorAll('.container').length > 4){
     cardWrapper.innerHTML += 
-  `<div class="container passive" type = ${type}>
+  `<div class="container passive" type = ${type} examId = ${id} time =${diff}>
     <div class="card">
       <div class="info">
         <h3 class="name">${name}</h3>
         <p class="describe"><i class="fa-regular fa-clock"></i> ${diff} phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
         <p class="question">${diff} câu hỏi</p>
       </div>
-      <a href="exam.html" class="do">Làm bài</a>
+      <a href="exam.html?id=${id}&time=${diff}" class="do">Làm bài</a>
     </div>
   </div>`;
   }
   else{
     cardWrapper.innerHTML += 
-  `<div class="container" type = ${type}>
+  `<div class="container" type = ${type} examId = ${id}>
     <div class="card">
       <div class="info">
         <h3 class="name">${name}</h3>
         <p class="describe"><i class="fa-regular fa-clock"></i> ${diff} phút | <i class="fa-solid fa-user-pen"></i> 187423 | <i class="fa-regular fa-comment"></i> 168</p>
         <p class="question">40 câu hỏi</p>
       </div>
-      <a href="exam.html" class="do">Làm bài</a>
+      <a href="exam.html?id=${id}&time=${diff}" class="do">Làm bài</a>
     </div>
   </div>`;
   }
