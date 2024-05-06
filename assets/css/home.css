@@ -160,24 +160,19 @@ a{
   border: 1px solid #dbdbdb;
 }
 
-.num_pages button:first-child{
-  border-radius: 10px 0 0 10px;
-}
 
-.num_pages button:last-child{
-  border-radius: 0 10px 10px 0;
-}
 
-.num_pages button a{
+.num_pages button{
   font-size: 1.2rem;
   color: #ad171c;
+  cursor: pointer;
 }
 
 .num_pages button.selected{
   background-color: #ad171c;
 }
 
-.num_pages button.selected a{
+.num_pages button.selected{
   color: #fff;
 }
 
@@ -187,3 +182,10 @@ a{
   margin-top: 30px;
 }
 
+.passive{
+  display: none;
+}
+
+.active{
+  display:block;
+}

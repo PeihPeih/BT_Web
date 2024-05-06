@@ -1,208 +1,222 @@
-// Dữ liệu mẫu cho danh sách kỳ thi và danh sách người dùng
-var exams = [
-    { id: 1, name: "Kỳ thi A" },
-    { id: 2, name: "Kỳ thi B" },
-    { id: 3, name: "Kỳ thi C" }
-  ];
-  
-  var users = [
-    { id: 1, name: "Người dùng 1" },
-    { id: 2, name: "Người dùng 2" },
-    { id: 3, name: "Người dùng 3" }
-  ];
-  
-  // Hiển thị danh sách kỳ thi
-  function showExamList() {
-    var table = document.getElementById("exam-table");
-    table.innerHTML = ""; // Xóa dữ liệu cũ
-  
-    for (var i = 0; i < exams.length; i++) {
-      var row = table.insertRow();
-      var idCell = row.insertCell(0);
-      var nameCell = row.insertCell(1);
-      var editCell = row.insertCell(2);
-      var deleteCell = row.insertCell(3);
-  
-      idCell.innerHTML = exams[i].id;
-      nameCell.innerHTML = exams[i].name;
-      editCell.innerHTML = "<button onclick='editExam(" + exams[i].id + ")' class='submit-btn' >Chỉnh sửa</button>";
-      deleteCell.innerHTML = "<button onclick='deleteExam(" + exams[i].id + ")' class='submit-btn' >Xóa</button>";
-    }
+
+var jwt = 'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidmR1bmciLCJpYXQiOjE3MTUwMjYwNDIsInJvbGVzIjoiQURNSU4ifQ.fXUFPEJxm5pZZ2IME88C7ckgJrIs0zY_wo8IMQiNtWWXnwpqp7fb5egwVufP9_Ncncw6gkT78eqbpAHJlGwP1Ys3RcWrjWWO32yJhwip2f27HloUTzq8p6l5__9ppP86UqH07j15q8ws_Dmv4f80AsWat1UWfCvv_aWCDmhBOKCAxoqZPCI_MB1mUCNDNSYYurR9VoAChJ6jYFPUO9KNk1NKZ2ZLhjSir4lxiXUnboemSORM0IJVynjpiMMMsGuaEcTj9r_dTb12_taa2AvVgwztdl3bp3DExtkGTcxH-qQ49NAs6sWKG4OYcn3rrUPG5vXNYZRaxwlX4dogxy23iQ';
+let BearerJwt = "Bearer ".concat(jwt);
+
+async function getAllExams(){
+  const response = await fetch('http://localhost:8080/admin/dashboard_admin/Exam/List', {
+    headers: {Authorization: BearerJwt}
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function getAllUser(){
+  const response = await fetch('http://localhost:8080/admin/dashboard_admin/User/List', {
+    headers: {Authorization: BearerJwt}
+  });
+  const data = await response.json();
+  return data;
+}
+
+// Hiển thị danh sách kỳ thi
+getAllExams().then(data =>
+  {
+    var stt = 1;
+    $('#tBodyExamtable').empty();
+    data.forEach(element => {
+      var id = String(element.examId);
+      var name = String(element.examName);
+      var type_exam = String(element.examType);
+      var time_start = String(element.startTime);
+      var time_end = String(element.endTime);
+      var res = "";
+      res  = '<tr id = '+id+'>';
+      res += '<th class = "stt" scope = "row">'+stt+'</th>';
+      res += '<th class = "exam_id" scope = "row">'+id+'</th>';
+      res += '<td class = "text-primary">' +name + '</td>';
+      res += '<td class = "type_exam">' +type_exam + '</td>';
+      res += '<td class = "time_start">' +time_start + '</td>';
+      res += '<td class = "time_end">' +time_end + '</td>';
+      res += '</tr><br>';
+      $('#tBodyExamtable').append(res);
+      stt+=1;
+    });
+    
+    
   }
-  
-  // Hiển thị danh sách người dùng
-  function showUserList() {
-    var table = document.getElementById("user-table");
-    table.innerHTML = ""; // Xóa dữ liệu cũ
-  
-    for (var i = 0; i < users.length; i++) {
-      var row = table.insertRow();
-      var idCell = row.insertCell(0);
-      var nameCell = row.insertCell(1);
-      var editCell = row.insertCell(2);
-      var deleteCell = row.insertCell(3);
-  
-      idCell.innerHTML = users[i].id;
-      nameCell.innerHTML = users[i].name;
-      editCell.innerHTML = "<button onclick='editUser(" + users[i].id + ")' class='submit-btn'>Chỉnh sửa</button>";
-      deleteCell.innerHTML = "<button onclick='deleteUser(" + users[i].id + ")' class='submit-btn'>Xóa</button>";
-    }
+)     
+
+// Hiển thị danh sách người dùng
+getAllUser().then(data =>
+  {
+    $('#tBodyUserTable').empty();
+    var stt = 1;
+    data.forEach(element => {
+      var arr = String(element).split(":");
+      var id = arr[0];
+      var name = arr[1];
+      var authority = arr[2];
+      var res = "";
+      res  = '<tr id = '+id+'>';
+      res += '<th class = "stt" scope = "row">'+stt+'</th>';
+      res += '<th class = "exam_id" scope = "row">'+id+'</th>';
+      res += '<td class = "text-primary">' +name + '</td>';
+      res += '<td class = "type_exam">' +authority+ '</td>';
+      res += '</tr><br>';
+      $('#tBodyUserTable').append(res);
+      stt++;
+    });
   }
+)     
+
+
+
+
+
+
+
+
+
+
+
+// Xử lí model bài thi ... đang phát triển
+      // // Get the modal
+      // var modal = document.getElementById("modalBaiThi");
+
+      // // Get the button that opens the modal
+      // var btn = document.getElementById("myBtn");
+
+      // // Get the <span> element that closes the modal
+      // var span = document.getElementsByClassName("close")[0];
+
+      // // When the user clicks the button, open the modal 
+      // btn.onclick = function() {
+      //   modal.style.display = "block";
+      // }
+
+      // // When the user clicks on <span> (x), close the modal
+      // span.onclick = function() {
+      //   modal.style.display = "none";
+      // }
+
+      // // When the user clicks anywhere outside of the modal, close it
+      // window.onclick = function(event) {
+      //   if (event.target == modal) {
+      //     modal.style.display = "none";
+      //   }
+      // }
   
-  // Hiển thị thống kê
-  function showStatistics() {
-    var statisticsContainer = document.getElementById("statistics-container");
-    statisticsContainer.innerHTML = ""; // Xóa dữ liệu cũ
+  // // Thêm mới kỳ thi
+  // function addExam() {
+  //   var examName = prompt("Nhập tên kỳ thi:");
+  //   var newExam = {
+  //     id: exams.length + 1,
+  //     name: examName
+  //   };
   
-    var statistics = calculateStatistics(); // Tính toán thống kê
+  //   exams.push(newExam);
+  //   showExamList();
+  // }
   
-    var statisticsTable = document.createElement("table");
-    statisticsTable.innerHTML = `
-      <tr>
-        <th>Kỳ thi</th>
-        <th>Số lượng người dùng</th>
-        <th>Tỷ lệ hoàn thành</th>
-        <th>Điểm trung bình</th>
-      </tr>
-    `;
+  // // Chỉnh sửa kỳ thi
+  // function editExam(examId) {
+  //   var examName = prompt("Nhập tên mới cho kỳ thi:");
   
-    for (var i = 0; i < statistics.length; i++) {
-      var row = statisticsTable.insertRow();
-      var examCell = row.insertCell(0);
-      var userCountCell = row.insertCell(1);
-      var completionRateCell = row.insertCell(2);
-      var averageScoreCell = row.insertCell(3);
+  //   for (var i = 0; i < exams.length; i++) {
+  //     if (exams[i].id === examId) {
+  //       exams[i].name = examName;
+  //       break;
+  //     }
+  //   }
   
-      examCell.innerHTML = statistics[i].exam;
-      userCountCell.innerHTML = statistics[i].userCount;
-      completionRateCell.innerHTML = statistics[i].completionRate;
-      averageScoreCell.innerHTML = statistics[i].averageScore;
-    }
+  //   showExamList();
+  // }
   
-    statisticsContainer.appendChild(statisticsTable);
-    statisticsContainer.style.display = "block";
-  }
+  // // Xóa kỳ thi
+  // function deleteExam(examId) {
+  //   for (var i = 0; i < exams.length; i++) {
+  //     if (exams[i].id === examId) {
+  //       exams.splice(i, 1);
+  //       break;
+  //     }
+  //   }
   
-  // Tính toán thống kê (dữ liệu mẫu)
-  function calculateStatistics() {
-    return [
-      { exam: "Kỳ thi A", userCount: 10, completionRate: "80%", averageScore: 8.5 },
-      { exam: "Kỳ thi B", userCount: 15, completionRate: "70%", averageScore: 7.8 },
-      { exam: "Kỳ thi C", userCount: 12, completionRate: "90%", averageScore: 9.2 }
-    ];
-  }
+  //   showExamList();
+  // }
   
-  // Thêm mới kỳ thi
-  function addExam() {
-    var examName = prompt("Nhập tên kỳ thi:");
-    var newExam = {
-      id: exams.length + 1,
-      name: examName
-    };
+  // // Thêm mới người dùng
+  // function addUser() {
+  //   var userName = prompt("Nhập tên người dùng:");
+  //   var newUser = {
+  //     id: users.length + 1,
+  //     name: userName
+  //   };
   
-    exams.push(newExam);
-    showExamList();
-  }
+  //   users.push(newUser);
+  //   showUserList();
+  // }
   
-  // Chỉnh sửa kỳ thi
-  function editExam(examId) {
-    var examName = prompt("Nhập tên mới cho kỳ thi:");
+  // // Chỉnh sửa người dùng
+  // function editUser(userId) {
+  //   var userName = prompt("Nhập tên mới cho người dùng:");
   
-    for (var i = 0; i < exams.length; i++) {
-      if (exams[i].id === examId) {
-        exams[i].name = examName;
-        break;
-      }
-    }
+  //   for (var i = 0; i < users.length; i++) {
+  //     if (users[i].id === userId) {
+  //       users[i].name = userName;
+  //       break;
+  //     }
+  //   }
   
-    showExamList();
-  }
+  //   showUserList();
+  // }
   
-  // Xóa kỳ thi
-  function deleteExam(examId) {
-    for (var i = 0; i < exams.length; i++) {
-      if (exams[i].id === examId) {
-        exams.splice(i, 1);
-        break;
-      }
-    }
+  // // Xóa người dùng
+  // function deleteUser(userId) {
+  //   for (var i = 0; i < users.length; i++) {
+  //     if (users[i].id === userId) {
+  //       users.splice(i, 1);
+  //       break;
+  //     }
+  //   }
   
-    showExamList();
-  }
+  //   showUserList();
+  // }
   
-  // Thêm mới người dùng
-  function addUser() {
-    var userName = prompt("Nhập tên người dùng:");
-    var newUser = {
-      id: users.length + 1,
-      name: userName
-    };
+  // // Hiển thị form thêm mới kỳ thi
+  // function showAddExamForm() {
+  //   var examName = prompt("Nhập tên kỳ thi:");
+  //   if (examName) {
+  //     var newExam = {
+  //       id: exams.length + 1,
+  //       name: examName
+  //     };
   
-    users.push(newUser);
-    showUserList();
-  }
+  //     exams.push(newExam);
+  //     showExamList();
+  //   }
+  // }
   
-  // Chỉnh sửa người dùng
-  function editUser(userId) {
-    var userName = prompt("Nhập tên mới cho người dùng:");
+  // // Hiển thị form thêm mới người dùng
+  // function showAddUserForm() {
+  //   var userName = prompt("Nhập tên người dùng:");
+  //   if (userName) {
+  //     var newUser = {
+  //       id: users.length + 1,
+  //       name: userName
+  //     };
   
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].id === userId) {
-        users[i].name = userName;
-        break;
-      }
-    }
+  //     users.push(newUser);
+  //     showUserList();
+  //   }
+  // }
   
-    showUserList();
-  }
+  // // Khởi chạy ban đầu
+  // function initialize() {
+  //   // showExamList();
+  //   // showUserList();
+  // }
   
-  // Xóa người dùng
-  function deleteUser(userId) {
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].id === userId) {
-        users.splice(i, 1);
-        break;
-      }
-    }
-  
-    showUserList();
-  }
-  
-  // Hiển thị form thêm mới kỳ thi
-  function showAddExamForm() {
-    var examName = prompt("Nhập tên kỳ thi:");
-    if (examName) {
-      var newExam = {
-        id: exams.length + 1,
-        name: examName
-      };
-  
-      exams.push(newExam);
-      showExamList();
-    }
-  }
-  
-  // Hiển thị form thêm mới người dùng
-  function showAddUserForm() {
-    var userName = prompt("Nhập tên người dùng:");
-    if (userName) {
-      var newUser = {
-        id: users.length + 1,
-        name: userName
-      };
-  
-      users.push(newUser);
-      showUserList();
-    }
-  }
-  
-  // Khởi chạy ban đầu
-  function initialize() {
-    showExamList();
-    showUserList();
-  }
-  
-  // Gọi hàm initialize khi trang được tải
-  window.onload = function () {
-    initialize();
-  };
+  // // Gọi hàm initialize khi trang được tải
+  // window.onload = function () {
+  //   initialize();
+  // };
