@@ -1,8 +1,8 @@
 const sub_btn = document.querySelector('.sub-btn')
 sub_btn.addEventListener('click', async (e) => {
     e.preventDefault()
-    const username = document.querySelector('#username').value
-    const password = document.querySelector('#password').value
+    const username = document.querySelector('#username_admin').value
+    const password = document.querySelector('#password_admin').value
 
     console.log(`Username : ${username}, Password: ${password}`)
 
