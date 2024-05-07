@@ -20,13 +20,26 @@ createCheckAnswer = (stt) => {
   helpplace.innerHTML += `<button class="checkans">${stt}</button>`
 }
 
-
-
-
-
-
-
-
+async function getResults(){
+  const queryString = window.location.search;
+  const urlParameters = new URLSearchParams(queryString);
+  let response = await fetch(`http://localhost:8080/exam/result/${urlParameters.get("id")}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    },
+  });
+  let data = await response.json();
+  console.log(data);
+  var correctAnswers = document.getElementById('correct-answers');
+  var totalQuestions = document.getElementById('total-questions');
+  var score = document.getElementById('score');
+  correctAnswers.textContent = data.count;
+  totalQuestions.textContent = data.total;
+  score.textContent = Math.round(count/total * 100)/10;
+}
+getResults();
 // Checkbox selected answer
 checkSelectedAnswer = ()=>{
   const questions = document.getElementsByClassName('question');

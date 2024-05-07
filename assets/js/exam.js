@@ -1,38 +1,54 @@
 const workplace = document.querySelector(".qanda");
 const helpplace = document.querySelector(".help_wrapper>.num_qa");
 const timer = document.querySelector("#time");
+const selectedPart = document.querySelector(".selected-part").innerHTML;
+const partBtns = document.querySelectorAll(".part");
 
-creatQA = (stt, question, options)=>{
-  workplace.innerHTML += `<form class="qanda">
-        <div class = "sentences">
-          <p class="question">${stt}. ${question}</p>
-          <input type="radio" class="answer" name = "${stt}" value="${options[0]}"> ${options[0]}<br>
-          <input type="radio" class="answer" name = "${stt}" value="${options[1]}"> ${options[1]}<br>
-          <input type="radio" class="answer" name = "${stt}" value="${options[2]}"> ${options[2]}<br>
-          <input type="radio" class="answer" name = "${stt}" value="${options[3]}"> ${options[3]}<br> 
-        </div>
+const urlParams = new URLSearchParams(window.location.search);
 
-      </form>`
-}
-
-createCheckAnswer = (stt) => {
-  helpplace.innerHTML += `<button class="checkans">${stt}</button>`
-}
-
-fetch('./qanda.json')
-  .then(response => response.json())
-  .then(data => {
-    for (let i = 0; i<data.length;i++){
-      creatQA(i+1, data[i].question, data[i].options);
-      createCheckAnswer(i+1);
+async function getQuestionOfExam(){
+  const response = await fetch('http://localhost:8080/question/get-all-questions', {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function getExamById(id){
+  const response = await fetch(`http://localhost:8080/exam/${id}`, {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });
+  const data = await response.json();
+  return data;
+}
+
+getQuestionOfExam().then(data => { 
+  let count = 1;
+  data.forEach((item) => {
+  if(item.examId == urlParams.get('id')){
+    getExamById(item.examId).then(data1 => {
+      document.querySelector(".title>h2").innerHTML = data1.examName;
+    })
+    const content = item.content;
+    const choices = JSON.parse(item.choices);
+    let escapedArray = choices.map(item => item.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+    createQA2(count, content, escapedArray);
+    createCheckAnswer(count);
+    count++;
+    timer.innerHTML = urlParams.get('time')+":00";
     checkSelectedAnswer();
-    submitExam(data);
-  })
-  .catch(error => console.error('Error fetching JSON:', error))
+    submitExam(count-1);
+  }})
+
+
+});
 
 // Time counter
-var count = 3600;
+var count =  urlParams.get('time')*60;
 const interval = 1000; // 1 giây
 
 function counter() {
@@ -73,26 +89,67 @@ checkSelectedAnswer = ()=>{
 }
 
 // Nộp bài thi
-submitExam = (question) => {
+submitExam = (question_length) => {
   const submit_btn = document.querySelector(".submit-btn");
   const form = document.querySelector("#form");
   submit_btn.addEventListener('click', (event) => {
     event.preventDefault();
-    if(checkFullSelected(question)) {
+    if(checkFullSelected(question_length)) {
       form.submit();
-      window.alert("Bạn đã nộp bài!")
-      window.location.href = "result.html";
-    }
-    else{
-      window.alert("Vui lòng trả lời hết các câu hỏi!")
+      window.alert("Bạn đã nộp bài!");
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id');
+      window.location.href = `result.html?id=${id}`;
     }
   })
 }
 
-checkFullSelected = (question)=>{
-  console.log(document.querySelectorAll('.selected').length, question.length);
-  if(document.querySelectorAll('.selected').length != question.length){
+checkFullSelected = (question_length)=>{
+  console.log(document.querySelectorAll('.selected').length, question_length);
+  if(document.querySelectorAll('.selected').length != question_length){
     return false;
   }
   return true;
+}
+
+createQA2 = (stt, question, options)=>{
+  workplace.innerHTML += `<form class="qanda">
+        <div class = "sentences">
+          <p class="question">${stt}. ${question}</p>
+          <input type="radio" class="answer" name = "${stt}" value="${options[0]}"> ${options[0]}<br>
+          <input type="radio" class="answer" name = "${stt}" value="${options[1]}"> ${options[1]}<br>
+          <input type="radio" class="answer" name = "${stt}" value="${options[2]}"> ${options[2]}<br>
+          <input type="radio" class="answer" name = "${stt}" value="${options[3]}"> ${options[3]}<br> 
+        </div>
+
+      </form>`
+}
+
+createQA1 = (stt, question, options)=>{
+  workplace.innerHTML += `<form class="qanda">
+        <div class = "sentences">
+          <p class="question">${stt}. ${question}</p>
+          <input type="radio" class="answer" name = "${stt}" value="${options[0]}"> ${options[0]}<br>
+          <input type="radio" class="answer" name = "${stt}" value="${options[1]}"> ${options[1]}<br>
+        </div>
+
+      </form>`
+}
+
+createQA3 = (stt, question, options)=>{
+  workplace.innerHTML += `<form class="qanda">
+        <div class = "sentences">
+          <p class="question">${stt}. ${question}</p>
+          <input type="checkbox" class="answer" value="${options[0]}"> ${options[0]}<br>
+          <input type="checkbox" class="answer" value="${options[1]}"> ${options[1]}<br>
+          <input type="checkbox" class="answer" value="${options[2]}"> ${options[2]}<br>
+          <input type="checkbox" class="answer" value="${options[3]}"> ${options[3]}<br> 
+        </div>
+      </form>`
+}
+
+
+createCheckAnswer = (stt) => {
+  helpplace.innerHTML += `<button class="checkans">${stt}</button>`
 }
