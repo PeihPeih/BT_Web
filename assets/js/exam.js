@@ -8,7 +8,7 @@ const urlParams = new URLSearchParams(window.location.search);
 
 async function getQuestionOfExam(){
   const response = await fetch('http://localhost:8080/question/get-all-questions', {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTQ5Mjk5MjUsInJvbGVzIjoiVVNFUiJ9.YVZ2rCw4LlEdTIElnbfaZ2D3btyd_qviT2SaO3re2r7nBaKDF6kLp7CyxzYHvfDVuLyMo40nDfjfkC_SJOXu_pEtGnAdpkFiMsy-qNjYWkkFFsA3YPqtf2LSGAGKeKM96thzC-oEHzCd1-Ikm8VVpngUgmlB17MxGjsqMWMgpbZnx5ni90Lu_wcYjwCD7fDrEIpITDIihuvgNBhS_l4iwxmy9jfuqJh-wn85TeR_dJyUgbwD2gRFQeaktJ8K2sKWhwQ4rCtHYDNIdhavde11SHTS91bh-f9GtCDzA2q9zkb3PtmjptlveFWvjkOsYdD5jNXDvdsj4x57dCPY-wDIig'}
+    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTUwMTEwMTIsInJvbGVzIjoiVVNFUiJ9.N_-QbtxzHDPQZkq4n8yDf40YzQ535e8s-ArESS4OMsBn3pWaY6t77p1IMTYiUx8CljHsQSQFCxvYPUkDmKOT6AYmZY4cRWdzF9EJXWVlUJTfGld2zvTd411O-D6HllrXaLX_SmdjtU0eo0j4PM3r46r6vmbGYTClWSfnpcAxDPA2iijShx6pkTVP7OHS3TF9-wcLpjIfJgO0yi7wYPYbEehwhg3dh_58nqRa-PrSGSegDLaT5HcTYbMBuMyDh4aC3F3yMkecaohdhjEflA5I9MCLwfNqk2sde-FGTxw45Eu5iDxn8bJaNjiy_QAZ0wFHJy7om0x-ML9CDDpk9yS8Ow'}
   });
   const data = await response.json();
   return data;
@@ -16,7 +16,7 @@ async function getQuestionOfExam(){
 
 async function getExamById(id){
   const response = await fetch(`http://localhost:8080/exam/${id}`, {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTQ5Mjk5MjUsInJvbGVzIjoiVVNFUiJ9.YVZ2rCw4LlEdTIElnbfaZ2D3btyd_qviT2SaO3re2r7nBaKDF6kLp7CyxzYHvfDVuLyMo40nDfjfkC_SJOXu_pEtGnAdpkFiMsy-qNjYWkkFFsA3YPqtf2LSGAGKeKM96thzC-oEHzCd1-Ikm8VVpngUgmlB17MxGjsqMWMgpbZnx5ni90Lu_wcYjwCD7fDrEIpITDIihuvgNBhS_l4iwxmy9jfuqJh-wn85TeR_dJyUgbwD2gRFQeaktJ8K2sKWhwQ4rCtHYDNIdhavde11SHTS91bh-f9GtCDzA2q9zkb3PtmjptlveFWvjkOsYdD5jNXDvdsj4x57dCPY-wDIig'}
+    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTUwMTEwMTIsInJvbGVzIjoiVVNFUiJ9.N_-QbtxzHDPQZkq4n8yDf40YzQ535e8s-ArESS4OMsBn3pWaY6t77p1IMTYiUx8CljHsQSQFCxvYPUkDmKOT6AYmZY4cRWdzF9EJXWVlUJTfGld2zvTd411O-D6HllrXaLX_SmdjtU0eo0j4PM3r46r6vmbGYTClWSfnpcAxDPA2iijShx6pkTVP7OHS3TF9-wcLpjIfJgO0yi7wYPYbEehwhg3dh_58nqRa-PrSGSegDLaT5HcTYbMBuMyDh4aC3F3yMkecaohdhjEflA5I9MCLwfNqk2sde-FGTxw45Eu5iDxn8bJaNjiy_QAZ0wFHJy7om0x-ML9CDDpk9yS8Ow'}
   });
   const data = await response.json();
   return data;
