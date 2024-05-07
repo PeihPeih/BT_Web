@@ -8,6 +8,7 @@ const urlParams = new URLSearchParams(window.location.search);
 
 async function getQuestionOfExam(){
   const response = await fetch('http://localhost:8080/question/get-all-questions', {
+
     headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
@@ -18,6 +19,7 @@ async function getQuestionOfExam(){
 
 async function getExamById(id){
   const response = await fetch(`http://localhost:8080/exam/${id}`, {
+
     headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
@@ -96,6 +98,7 @@ submitExam = (question_length) => {
     event.preventDefault();
     if(checkFullSelected(question_length)) {
       form.submit();
+
       window.alert("Bạn đã nộp bài!");
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);

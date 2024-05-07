@@ -1,5 +1,6 @@
 async function getAllExam(){
   const response = await fetch('http://localhost:8080/exam/get-all-exams', {
+
     headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
