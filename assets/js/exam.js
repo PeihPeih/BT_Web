@@ -8,8 +8,10 @@ const urlParams = new URLSearchParams(window.location.search);
 
 async function getQuestionOfExam(){
   const response = await fetch('http://localhost:8080/question/get-all-questions', {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidmR1bmciLCJpYXQiOjE3MTUwMTU5MzUsInJvbGVzIjoiQURNSU4ifQ.FpGBvIxXigIYUf98eEYUZEo6Oi5fyz2RT8P0oMFRC374VWsgohNpKHbbI_C_xIBGxHRI_R9vVZH4iZLC9vpRH59qTErPw85Swtdu7wpXP22eI7mJKaFkeMOnVhLZ33EPfWWK14bM1xv5EKgxtB8iMfdtqQCJH1xZFlfIpJQAyfem003AL63Itoq73N2l6mlLJQEnkkdk8V4GC11KikpbNwMkuzryTJp1oBmbG4BWli6nvSsGtct-fw5YtI-drccT1CBq7Kley1FioHHNt7TntWivTcIaKaRhkULBm6-RCial-zj8uy0-foBjkDcGq4e8n9OJO0iiEqjrUwIaFrsSoA'}
 
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
   });
   const data = await response.json();
   return data;
@@ -17,7 +19,10 @@ async function getQuestionOfExam(){
 
 async function getExamById(id){
   const response = await fetch(`http://localhost:8080/exam/${id}`, {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidmR1bmciLCJpYXQiOjE3MTUwMTU5MzUsInJvbGVzIjoiQURNSU4ifQ.FpGBvIxXigIYUf98eEYUZEo6Oi5fyz2RT8P0oMFRC374VWsgohNpKHbbI_C_xIBGxHRI_R9vVZH4iZLC9vpRH59qTErPw85Swtdu7wpXP22eI7mJKaFkeMOnVhLZ33EPfWWK14bM1xv5EKgxtB8iMfdtqQCJH1xZFlfIpJQAyfem003AL63Itoq73N2l6mlLJQEnkkdk8V4GC11KikpbNwMkuzryTJp1oBmbG4BWli6nvSsGtct-fw5YtI-drccT1CBq7Kley1FioHHNt7TntWivTcIaKaRhkULBm6-RCial-zj8uy0-foBjkDcGq4e8n9OJO0iiEqjrUwIaFrsSoA'}
+
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
   });
   const data = await response.json();
   return data;
@@ -93,8 +98,12 @@ submitExam = (question_length) => {
     event.preventDefault();
     if(checkFullSelected(question_length)) {
       form.submit();
-      window.alert("Bạn đã nộp bài!")
-      window.location.href = "result.html";
+
+      window.alert("Bạn đã nộp bài!");
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id');
+      window.location.href = `result.html?id=${id}`;
     }
   })
 }

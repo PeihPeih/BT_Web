@@ -1,6 +1,9 @@
 async function getAllExam(){
   const response = await fetch('http://localhost:8080/exam/get-all-exams', {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTQ5Mjk5MjUsInJvbGVzIjoiVVNFUiJ9.YVZ2rCw4LlEdTIElnbfaZ2D3btyd_qviT2SaO3re2r7nBaKDF6kLp7CyxzYHvfDVuLyMo40nDfjfkC_SJOXu_pEtGnAdpkFiMsy-qNjYWkkFFsA3YPqtf2LSGAGKeKM96thzC-oEHzCd1-Ikm8VVpngUgmlB17MxGjsqMWMgpbZnx5ni90Lu_wcYjwCD7fDrEIpITDIihuvgNBhS_l4iwxmy9jfuqJh-wn85TeR_dJyUgbwD2gRFQeaktJ8K2sKWhwQ4rCtHYDNIdhavde11SHTS91bh-f9GtCDzA2q9zkb3PtmjptlveFWvjkOsYdD5jNXDvdsj4x57dCPY-wDIig'}
+
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
   });
   const data = await response.json();
   return data;
