@@ -27,7 +27,6 @@ let params = new URLSearchParams(url.search);
         createPageBtn(i+1);
       }
       const examForm = document.querySelectorAll('.container');
-      console.log(examForm[0].classList.add('active'));
       changeNumPage(examForm); 
     }
     else{
@@ -35,6 +34,7 @@ let params = new URLSearchParams(url.search);
       
     }
     createTypeDroplist(typeExam);
+    editNumOfQuestion(0, document.querySelectorAll('.container'));
   });
 
 
@@ -143,7 +143,6 @@ searchBtn.addEventListener('click', (event) => {
     window.location.href = 'index.html';
   }
   else if (type != ""){
-    console.log(1);
     const examForm = document.querySelectorAll('.container');
     examForm.forEach(item => {addClass(item, 'passive'), removeClass(item, 'active')});
 
@@ -153,7 +152,6 @@ searchBtn.addEventListener('click', (event) => {
 });
 
 async function getExamAllowQuery(type) {
-  console.log(1);
   const response1 = await fetch(`http://localhost:8080/exam/exam-type/${type}`, {
     headers: {Authorization: `Bearer ${localStorage.getItem('token')}` }
   });
@@ -168,3 +166,31 @@ async function getExamAllowQuery(type) {
    changeNumPage(examForm); 
   // Now you have data from both APIs
 }
+
+async function getQuestionOfExam(){
+  const response = await fetch('http://localhost:8080/question/get-all-questions', {
+
+
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });
+  const data = await response.json();
+  return data;
+}
+
+editNumOfQuestion = (num, examForm) => {
+  getQuestionOfExam().then(data => { 
+    console.log(data);
+    examForm.forEach(item => {
+      let num = 0;
+      let examId = item.getAttribute('examId');
+      data.forEach((item) => {
+        if(item.examId == examId){
+          num++;
+        }
+      })
+      item.querySelector('.question').innerHTML = `${num} câu hỏi`;
+    })
+  }
+)}
