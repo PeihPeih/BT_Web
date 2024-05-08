@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="assets\css\dashboard-admin.css">
     <link rel="stylesheet" href="./assets/css/header.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -24,7 +25,7 @@
     </nav>
 
     <div class="signin">
-      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng nhập</a>
+      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
     </div>
   </header>
 
@@ -32,30 +33,47 @@
   <div id="main_dashboard_admin">
   <div id="exam-section" class="section1">
     <h2>Quản lý danh sách kỳ thi</h2>
-    <button onclick="showAddExamForm()" class="submit-btn">Thêm mới</button>
-    <table id="exam-table">
-      <tr>
-        <th>ID</th>
-        <th>Tên kỳ thi</th>
-        <th>Chỉnh sửa</th>
-        <th>Xóa</th>
-      </tr>
-      <!-- Dữ liệu kỳ thi sẽ được thêm vào đây bằng JavaScript -->
-    </table>
+    <!-- <button onclick="showAddExamForm()" class="submit-btn">Thêm mới</button> -->
+    <div style = "height:300px; width: 90% ;overflow-y:scroll;">
+      <table id="exam-table" class = "mytable">
+        <thead>
+          <tr>
+            <th>Stt</th>
+            <th>ID</th>
+            <th>Tên kỳ thi</th>
+            <th>Loại</th>
+            <th>Thời gian bắt đầu</th>
+            <th>Thời gian kết thúc</th>
+            <!-- <th>Chỉnh sửa</th>
+            <th>Xóa</th> -->
+          </tr>
+        </thead>
+        <tbody id="tBodyExamtable">
+        <!-- Dữ liệu kỳ thi sẽ được thêm vào đây bằng JavaScript -->
+        </tbody>
+      </table>
+  </div>
   </div>
 
   <div id="user-section" class="section1">
     <h2>Quản lý danh sách người dùng</h2>
-    <button onclick="showAddUserForm()" class='submit-btn'>Thêm mới</button>
-    <table id="user-table">
-      <tr>
-        <th>ID</th>
-        <th>Tên người dùng</th>
-        <th>Chỉnh sửa</th>
-        <th>Xóa</th>
-      </tr>
-      <!-- Dữ liệu người dùng sẽ được thêm vào đây bằng JavaScript -->
-    </table>
+    <!-- <button onclick="showAddUserForm()" class='submit-btn'>Thêm mới</button> -->
+    <div style = "height:300px; width: 90%; overflow-y:scroll;">
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>Stt</th>
+            <th>ID</th>
+            <th>Tên người dùng</th>
+            <th>Quyền hạn</th>
+            <!-- <th>Chỉnh sửa</th>
+            <th>Xóa</th> -->
+          </tr>
+        </thead>
+        <tbody id="tBodyUserTable">
+          <!-- Dữ liệu người dùng sẽ được thêm vào đây bằng JavaScript -->      </tbody>
+      </table>
+    </div> 
   </div>
 
   <div id="statistics-section" class="section1">
@@ -82,6 +100,43 @@
   </div>
 </div>
   <script src="assets\js\dashboard-admin.js"></script>
+
+  <!-- Modal Bai Thi -->
+  <div id="modalBaiThi" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-body">
+  
+  
+              <div class="form-group">
+              <label name="InsertExam">Tên kì thi:</label>
+              <textarea class="form-control" id="txaExamAdd" rows="1" placeholder="Tên bài thi"></textarea>
+              </div>
+  
+              <div class="form-group">
+              <label name="InsertNumQues">Loại bài thi:</label>
+                <select name="type_exam" id="type_exam">
+                  <option value="Kiem_tra_15">Kiem_tra_15</option>
+                  <option value="Kiem_tra_30">Kiem_tra_30</option>
+                  <option value="Kiem_tra_45">Kiem_tra_45</option>
+                  <option value="Kiem_tra_60">Kiem_tra_60</option>
+                </select>
+              </div>
+  
+              <div class="form-group">
+              <label for="time_start">Thời gian bắt đầu:</label>
+          <input type="datetime-local" id="time_start" name="time_start">
+              </div>
+              
+              <div class="form-group">
+              <label for="time_end">Thời gian kết thúc:</label>
+          <input type="datetime-local" id="time_end" name="time_end">
+              </div>
+    </div>
+  </div>
+   
 </body>
 <footer id="footer">
   <p>Copyright © 2020 Học viện Công nghệ Bưu chính Viễn thông</p>

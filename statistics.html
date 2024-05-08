@@ -4,6 +4,8 @@
   <title>Trang Thống kê</title>
   <link rel="stylesheet" type="text/css" href="assets\css\statistics.css">
   <link rel="stylesheet" href="./assets/css/header.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 </head>
 <body>
   <!--Header-->
@@ -21,7 +23,7 @@
     </nav>
 
     <div class="signin">
-      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng nhập</a>
+      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
     </div>
   </header>
 
@@ -29,8 +31,8 @@
   <h1>Trang Thống kê</h1>
   
   <div id="filter">
-    <label for="exam">Kỳ thi:</label>
-    <select id="exam">
+    <label for="selectorExam">Kỳ thi:</label>
+    <select id="selectorExam">
       <option value="all">Tất cả</option>
       <option value="exam1">Kỳ thi 1</option>
       <option value="exam2">Kỳ thi 2</option>
@@ -49,10 +51,10 @@
     </thead>
     <tbody>
       <tr>
-        <td id="totalAttempts">0</td>
-        <td id="completionRate">0%</td>
-        <td id="averageScore">0</td>
-        <td id="scoreDistribution"></td>
+        <td id="tongSolanThamGia">0</td>
+        <td id="tyLeHoanThanh">0%</td>
+        <td id="diemtb">0</td>
+        <td id="phanPhoiDiem"></td>
       </tr>
     </tbody>
   </table>

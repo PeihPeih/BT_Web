@@ -1,6 +1,10 @@
 async function getAllExam(){
   const response = await fetch('http://localhost:8080/exam/get-all-exams', {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTUwMTEwMTIsInJvbGVzIjoiVVNFUiJ9.N_-QbtxzHDPQZkq4n8yDf40YzQ535e8s-ArESS4OMsBn3pWaY6t77p1IMTYiUx8CljHsQSQFCxvYPUkDmKOT6AYmZY4cRWdzF9EJXWVlUJTfGld2zvTd411O-D6HllrXaLX_SmdjtU0eo0j4PM3r46r6vmbGYTClWSfnpcAxDPA2iijShx6pkTVP7OHS3TF9-wcLpjIfJgO0yi7wYPYbEehwhg3dh_58nqRa-PrSGSegDLaT5HcTYbMBuMyDh4aC3F3yMkecaohdhjEflA5I9MCLwfNqk2sde-FGTxw45Eu5iDxn8bJaNjiy_QAZ0wFHJy7om0x-ML9CDDpk9yS8Ow'}
+
+
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
   });
   const data = await response.json();
   return data;
@@ -134,7 +138,7 @@ searchBtn.addEventListener('click', (event) => {
     }
   const queryString = new URLSearchParams(obj).toString();
   const searchUrl = 'index.html?'+queryString;
-  
+
   if (type == "Tất cả"){
     window.location.href = 'index.html';
   }
@@ -151,7 +155,7 @@ searchBtn.addEventListener('click', (event) => {
 async function getExamAllowQuery(type) {
   console.log(1);
   const response1 = await fetch(`http://localhost:8080/exam/exam-type/${type}`, {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTUwMTEwMTIsInJvbGVzIjoiVVNFUiJ9.N_-QbtxzHDPQZkq4n8yDf40YzQ535e8s-ArESS4OMsBn3pWaY6t77p1IMTYiUx8CljHsQSQFCxvYPUkDmKOT6AYmZY4cRWdzF9EJXWVlUJTfGld2zvTd411O-D6HllrXaLX_SmdjtU0eo0j4PM3r46r6vmbGYTClWSfnpcAxDPA2iijShx6pkTVP7OHS3TF9-wcLpjIfJgO0yi7wYPYbEehwhg3dh_58nqRa-PrSGSegDLaT5HcTYbMBuMyDh4aC3F3yMkecaohdhjEflA5I9MCLwfNqk2sde-FGTxw45Eu5iDxn8bJaNjiy_QAZ0wFHJy7om0x-ML9CDDpk9yS8Ow'}
+    headers: {Authorization: `Bearer ${localStorage.getItem('token')}` }
   });
   const data = await response1.json();
   for (let i = 0; i<data.length;i++){
