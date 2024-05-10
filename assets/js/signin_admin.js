@@ -9,9 +9,8 @@ sub_btn.addEventListener('click', async (e) => {
     const data = {
         username: username,
         password: password
-    }   
+    }
 
-    console.log(data)
     try {
         const response = await fetch('http://localhost:8080/auth/login', {
             method: 'POST',
@@ -26,11 +25,32 @@ sub_btn.addEventListener('click', async (e) => {
         }
 
         const responseData = await response.json();
-        console.log('Success:', responseData);
+        const token = responseData.jwt
+        const authority = responseData.user.authorities[0].authority
 
-        localStorage.setItem('token', responseData.jwt);
+        if (token.length == 0 || authority != 'ADMIN') {
+            const warning = document.querySelector('.error-message')
+            if (warning != null) {
+                return
+            }
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "Password is incorrect";
+            errorMessage.style.color = "red";
+            errorMessage.className = 'error-message'
 
-        // Redirect to exam
+            const loginContainer = document.querySelector(".login-container");
+            loginContainer.appendChild(errorMessage);
+        } else {
+            const warning = document.querySelector('.error-message')
+            if (warning != null) {
+                warning.remove()
+            }
+
+            localStorage.setItem('token', responseData.jwt);
+            console.log(`Token: ${token}`)
+
+            window.location.href = './dashboard_admin.html'
+        }
 
 
     } catch (error) {
