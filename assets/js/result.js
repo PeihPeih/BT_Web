@@ -35,6 +35,7 @@ async function getResults(){
   var correctAnswers = document.getElementById('correct-answers');
   var totalQuestions = document.getElementById('total-questions');
   var score = document.getElementById('score');
+  console.log(data.count, data.total);
   correctAnswers.textContent = data.count;
   totalQuestions.textContent = data.total;
   score.textContent = Math.round(count/total * 100)/10;

@@ -4,7 +4,7 @@ let BearerJwt = "Bearer ".concat(jwt);
 
 async function getAllExams(){
   const response = await fetch('http://localhost:8080/admin/dashboard_admin/Exam/List', {
-    headers: {Authorization: BearerJwt}
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token') }
   });
   const data = await response.json();
   return data;
@@ -12,7 +12,7 @@ async function getAllExams(){
 
 async function getAllUser(){
   const response = await fetch('http://localhost:8080/admin/dashboard_admin/User/List', {
-    headers: {Authorization: BearerJwt}
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}
   });
   const data = await response.json();
   return data;

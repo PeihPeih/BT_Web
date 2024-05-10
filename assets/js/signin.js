@@ -61,4 +61,6 @@ sub_btn.addEventListener('click', async (e) => {
     } catch (error) {
         console.error('Error:', error);
     }
+
+    window.location.href = 'index.html';
 })

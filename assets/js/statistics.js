@@ -1,6 +1,6 @@
 
 var jwt = 'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidmR1bmciLCJpYXQiOjE3MTUwMjYwNDIsInJvbGVzIjoiQURNSU4ifQ.fXUFPEJxm5pZZ2IME88C7ckgJrIs0zY_wo8IMQiNtWWXnwpqp7fb5egwVufP9_Ncncw6gkT78eqbpAHJlGwP1Ys3RcWrjWWO32yJhwip2f27HloUTzq8p6l5__9ppP86UqH07j15q8ws_Dmv4f80AsWat1UWfCvv_aWCDmhBOKCAxoqZPCI_MB1mUCNDNSYYurR9VoAChJ6jYFPUO9KNk1NKZ2ZLhjSir4lxiXUnboemSORM0IJVynjpiMMMsGuaEcTj9r_dTb12_taa2AvVgwztdl3bp3DExtkGTcxH-qQ49NAs6sWKG4OYcn3rrUPG5vXNYZRaxwlX4dogxy23iQ';
-let BearerJwt = "Bearer ".concat(jwt);
+let BearerJwt = "Bearer ".concat(localStorage.getItem('token'));
 
 async function findAllExamsWithStats(){
   const response = await fetch('http://localhost:8080/admin/statistic/', {
