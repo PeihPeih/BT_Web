@@ -147,22 +147,54 @@ checkSelectedAnswer = ()=>{
 submitExam = (question_length) => {
   const submit_btn = document.querySelector(".submit-btn");
   const form = document.querySelector("#form");
-  submit_btn.addEventListener('click', (event) => {
+  submit_btn.addEventListener('click', async (event) => {
     event.preventDefault();
     if(checkFullSelected(question_length)) {
-      form.submit();
 
       window.alert("Bạn đã nộp bài!");
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      const id = urlParams.get('id');
+      const id = urlParams.get('id'); // Exam id
+      const userId = localStorage.getItem('userId');
+      const answers = [];
+      const questions = document.querySelectorAll('.sentences');
+      for(let i = 0; i<questions.length; i++){ 
+        const answer = questions[i].querySelectorAll('.answer');
+        const choices = [];
+        for(let j = 0; j<answer.length; j++){
+          if(answer[j].checked){
+            choices.push(String.fromCharCode(65+j));
+          }
+        }
+        const qa = {
+          "questionId": i+1,
+          "choices": "['" + choices.join("', '") + "']"
+        }
+        answers.push(qa);
+      }
+      const data = {
+        "userId": parseInt(userId),
+        "examId": parseInt(id),
+        "answers": answers
+      }
+      const submitData = await fetch('http://localhost:8080/submission/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', charset: 'UTF-8',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+      });
+
+      const submitResponse = await submitData.json();
+      localStorage.setItem('result', submitResponse.data.result); 
+      console.log(localStorage.getItem('result'));
       window.location.href = `result.html?id=${id}`;
     }
   })
 }
 
 checkFullSelected = (question_length)=>{
-  console.log(document.querySelectorAll('.selected').length, question_length);
   if(document.querySelectorAll('.selected').length != question_length){
     return false;
   }

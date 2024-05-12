@@ -29,7 +29,7 @@ sub_btn.addEventListener('click', async (e) => {
         console.log('Success:', responseData);
 
         localStorage.setItem('token', responseData.jwt);
-
+        localStorage.setItem('userId', responseData.user.userId);
         // Redirect to exam
 
 
