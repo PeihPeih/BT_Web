@@ -68,14 +68,15 @@ checkFullSelected = (question)=>{
   return true;
 }
 
+getResults();
 // Fix dữ liệu
-var correctAnswers = 7;
-var totalQuestions = 10;
-var score = (correctAnswers / totalQuestions) * 10;
+// var correctAnswers = 7;
+// var totalQuestions = 10;
+// var score = (correctAnswers / totalQuestions) * 10;
 
-// Hiển thị số câu trả lời đúng và tổng số câu
-document.getElementById('correct-answers').textContent = correctAnswers;
-document.getElementById('total-questions').textContent = totalQuestions;
+// // Hiển thị số câu trả lời đúng và tổng số câu
+// document.getElementById('correct-answers').textContent = correctAnswers;
+// document.getElementById('total-questions').textContent = totalQuestions;
 
 // Tính toán và hiển thị điểm số
 document.getElementById('score').textContent = score.toFixed(2);
