@@ -8,6 +8,15 @@ async function getAllExams(){
   return data;
 }
 
+async function getQuestionsByExamId(id){
+  const response = await fetch('http://localhost:8080/question/get-all-questions/exam/'+id, {
+      method: 'GET',  
+      headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}
+  });
+  const data = await response.json();
+  return data;
+}
+
 async function getAllUser(){
   const response = await fetch('http://localhost:8080/admin/dashboard_admin/User/List', {
     headers: {Authorization: BearerJwt}
@@ -25,6 +34,14 @@ async function deleteExamById(id){
   return data;
 }
 
+async function deleteQuestionById(id){
+  const response = await fetch('http://localhost:8080/question/delete/'+id, {
+    method: 'DELETE',  
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}
+  });
+  const data = await response.text();
+  return data;
+}
 $(document).ready(function(){
   loadData();
 });
@@ -107,22 +124,63 @@ $("#tBodyExamtable").on("click", ".btnDelete", function() {
   console.log(id_exam);
   if(confirm("Ban có chắc muốn xóa kì thi này?"))
   {
-    deleteExamById(id_exam).then(data=>
-      {
-        console.log(data);
-        if (data != null)
-          {
-            if(!alert("Xóa thành công!"))
-            {
-              loadData();
-            }
-          }
-      }
-    )
+    async_fun (id_exam);
   }
 });
 
+function myDeleteQuestionByIdExam(id) {
+  done = "Đã xóa hết câu hỏi!"
+  getQuestionsByExamId(id).then(data =>
+    {
+        data.forEach(element => {
+            var questionId = element.questionId;
+            deleteQuestionById(questionId).then(data =>
+            {
+              console.log("Xóa câu hỏi: ", data);
+            })
+        });
+    }
+    )
+    return new Promise(resolve => {
+      setTimeout(function () {
+          resolve("\t\t This is first promise");
+          console.log("Returned first promise");
+      }, 1000);
+  });
+}
 
+function myDeleteExamById(id_exam) {
+  deleteExamById(id_exam).then(data=>
+    {
+      console.log(data);
+      if (data != null)
+        {
+          if(!alert("Xóa thành công!"))
+          {
+            loadData();
+          }
+        }
+    }
+  )
+  return new Promise(resolve => {
+    setTimeout(function () {
+        resolve("\t\t This is second promise");
+        console.log("Returned second promise");
+    }, 2000);
+});
+}
+
+async function async_fun (id) {
+ 
+  const first_promise = await myDeleteQuestionByIdExam(id);
+  console.log("After awaiting for 2 seconds," +
+      "the promise returned from first function is:");
+
+  const second_promise = await myDeleteExamById(id);
+  console.log("After awaiting for 4 seconds, the" +
+      "promise returned from second function is:");
+  console.log(second_promise);
+}
 
 
 
