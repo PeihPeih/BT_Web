@@ -203,6 +203,7 @@ checkFullSelected = (question_length)=>{
 
 // Trắc nghiệm 1 câu
 createQA1 = (stt, question, options, questionTypeId)=>{
+  console.log(question, "; ", options);
   workplace.innerHTML += `<form class="qanda">
         <div class = "sentences" typeId = ${questionTypeId}>
           <p class="question">${stt}. ${question}</p>
