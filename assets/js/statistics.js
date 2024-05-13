@@ -1,6 +1,5 @@
 
-var jwt = 'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidmR1bmciLCJpYXQiOjE3MTUwMjYwNDIsInJvbGVzIjoiQURNSU4ifQ.fXUFPEJxm5pZZ2IME88C7ckgJrIs0zY_wo8IMQiNtWWXnwpqp7fb5egwVufP9_Ncncw6gkT78eqbpAHJlGwP1Ys3RcWrjWWO32yJhwip2f27HloUTzq8p6l5__9ppP86UqH07j15q8ws_Dmv4f80AsWat1UWfCvv_aWCDmhBOKCAxoqZPCI_MB1mUCNDNSYYurR9VoAChJ6jYFPUO9KNk1NKZ2ZLhjSir4lxiXUnboemSORM0IJVynjpiMMMsGuaEcTj9r_dTb12_taa2AvVgwztdl3bp3DExtkGTcxH-qQ49NAs6sWKG4OYcn3rrUPG5vXNYZRaxwlX4dogxy23iQ';
-let BearerJwt = "Bearer ".concat(jwt);
+let BearerJwt = 'Bearer ' + localStorage.getItem('token');
 
 async function findAllExamsWithStats(){
   const response = await fetch('http://localhost:8080/admin/statistic/', {
@@ -50,15 +49,16 @@ getAllNameExam().then(data =>
           var tyLeHoanThanh = data.tyLeHoanThanh;
           var diemtb = data.diemtb;
           var phanPhoiDiem = data.phanPhoiDiem;
-          var strphanPhoiDiem = "";
-          phanPhoiDiem.forEach(element => {
-            strphanPhoiDiem += element + "<br>";
-          });
+          // var strphanPhoiDiem = "";
+          // phanPhoiDiem.forEach(element => {
+          //   strphanPhoiDiem += element + "<br>";
+          // });
           var tongSolanThamGia = data.tongSolanThamGia;
           document.getElementById("tongSolanThamGia").innerHTML = tongSolanThamGia;
           document.getElementById("tyLeHoanThanh").innerHTML = tyLeHoanThanh;
           document.getElementById("diemtb").innerHTML = diemtb;
-          document.getElementById("phanPhoiDiem").innerHTML = strphanPhoiDiem;
+          // document.getElementById("phanPhoiDiem").innerHTML = strphanPhoiDiem;
+          draw(phanPhoiDiem);
           console.log(data);
         }
       )
@@ -70,21 +70,87 @@ getAllNameExam().then(data =>
           var tyLeHoanThanh = data.tyLeHoanThanh;
           var diemtb = data.diemtb;
           var phanPhoiDiem = data.phanPhoiDiem;
-          var strphanPhoiDiem = "";
-          phanPhoiDiem.forEach(element => {
-            strphanPhoiDiem += element + "<br>";
-          });
+          // var strphanPhoiDiem = "";
+          // phanPhoiDiem.forEach(element => {
+          //   strphanPhoiDiem += element + "<br>";
+          // });
           var tongSolanThamGia = data.tongSolanThamGia;
           document.getElementById("tongSolanThamGia").innerHTML = tongSolanThamGia;
           document.getElementById("tyLeHoanThanh").innerHTML = tyLeHoanThanh;
           document.getElementById("diemtb").innerHTML = diemtb;
-          document.getElementById("phanPhoiDiem").innerHTML = strphanPhoiDiem;
+          // document.getElementById("phanPhoiDiem").innerHTML = strphanPhoiDiem;
+          draw(phanPhoiDiem);
           console.log(data);
         }
       )
     }
   }
   
+  function draw(phanPhoiDiem)
+  {
+    var arrayPhanPhoiDiem = {};
+    phanPhoiDiem.forEach(element => {
+      var tmp = element.split(":");
+      arrayPhanPhoiDiem[parseFloat(tmp[0])] = parseInt(tmp[1]);
+    });
+
+    var labels = [];
+    for (i = 0; i <= 10; i += 0.1)
+    {
+        labels.push(Number((parseFloat(i)).toFixed(1)));
+    }
+    var values = [];
+    labels.forEach(element => {
+      if (arrayPhanPhoiDiem[element] == undefined)
+        {
+          values.push(0);
+        }
+      else
+      {
+        values.push(arrayPhanPhoiDiem[element]);
+      }
+    });
+
+    drawChart(labels, values);
+    
+  }
+
+  Array.prototype.max = function() {
+    return Math.max.apply(null, this);
+  };
+
+  function drawChart(labels, values) {
+    var ctx = document.getElementById("chart").getContext("2d");
+    var graph = Chart.getChart("chart");
+    if (graph) graph.destroy();
+    var chart = new Chart(ctx, 
+    {
+        type: "bar",
+        data: 
+        {
+          labels: labels,
+          datasets: [{
+              label: "Số lần xuất hiện",
+              data: values,
+              backgroundColor: "rgba(54, 162, 235, 0.7)",
+              // fill: false,
+          }]
+        },
+        options: 
+        {
+          scales: {
+              y: {
+              beginAtZero: true,
+              stepSize: 1,
+              precision: 0,
+              min : 0,
+              max: values.max() + 2
+              }
+          }
+        }
+    });
+  }
+
   // Xuất PDF
   function exportPDF() {
     // Code xuất PDF

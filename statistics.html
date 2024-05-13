@@ -5,7 +5,8 @@
   <link rel="stylesheet" type="text/css" href="assets\css\statistics.css">
   <link rel="stylesheet" href="./assets/css/header.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+  <!-- Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <!--Header-->
@@ -16,11 +17,12 @@
     
     <nav id="navbar">
       <li>
-        <ul><a href="#">Khóa học</a></ul>
-        <ul><a href="index.html">Đề thi online</a></ul>
-        <ul><a href="#">Tuyển sinh</a></ul>
+          <ul><a href="dashboard_admin.html">Dashboard</a></ul>
+          <ul><a href="exam-form.html">Tạo kỳ thi</a></ul>
+          <ul><a href="statistics.html">Thống kê</a></ul>
+          <ul><a href="student-result.html">Kết quả thi</a></ul>
       </li>
-    </nav>
+  </nav>
 
     <div class="signin">
       <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng nhập</a>
@@ -54,7 +56,7 @@
         <td id="tongSolanThamGia">0</td>
         <td id="tyLeHoanThanh">0%</td>
         <td id="diemtb">0</td>
-        <td id="phanPhoiDiem"></td>
+        <td id="phanPhoiDiem"><canvas id="chart"></canvas></td>
       </tr>
     </tbody>
   </table>

@@ -1,6 +1,4 @@
 
-var jwt = 'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidmR1bmciLCJpYXQiOjE3MTUwMjYwNDIsInJvbGVzIjoiQURNSU4ifQ.fXUFPEJxm5pZZ2IME88C7ckgJrIs0zY_wo8IMQiNtWWXnwpqp7fb5egwVufP9_Ncncw6gkT78eqbpAHJlGwP1Ys3RcWrjWWO32yJhwip2f27HloUTzq8p6l5__9ppP86UqH07j15q8ws_Dmv4f80AsWat1UWfCvv_aWCDmhBOKCAxoqZPCI_MB1mUCNDNSYYurR9VoAChJ6jYFPUO9KNk1NKZ2ZLhjSir4lxiXUnboemSORM0IJVynjpiMMMsGuaEcTj9r_dTb12_taa2AvVgwztdl3bp3DExtkGTcxH-qQ49NAs6sWKG4OYcn3rrUPG5vXNYZRaxwlX4dogxy23iQ';
-let BearerJwt = "Bearer ".concat(jwt);
 
 async function getAllExams(){
   const response = await fetch('http://localhost:8080/admin/dashboard_admin/Exam/List', {
@@ -18,58 +16,111 @@ async function getAllUser(){
   return data;
 }
 
-// Hiển thị danh sách kỳ thi
-getAllExams().then(data =>
+async function deleteExamById(id){
+  const response = await fetch('http://localhost:8080/admin/dashboard_admin/Exam2/Delete/'+id, {
+    method: 'DELETE',  
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}
+  });
+  const data = await response.text();
+  return data;
+}
+
+$(document).ready(function(){
+  loadData();
+});
+
+function loadData() {
+  getAllExams().then(data =>
+    {
+      var stt = 1;
+      $('#tBodyExamtable').empty();
+      data.forEach(element => {
+        var id = String(element.examId);
+        var name = String(element.examName);
+        var type_exam = String(element.examType);
+        var time_start = String(element.startTime);
+        var time_end = String(element.endTime);
+        var res = "";
+        res  = '<tr id = '+id+'>';
+        res += '<th class = "stt" scope = "row">'+stt+'</th>';
+        res += '<th class = "examID" scope = "row">'+id+'</th>';
+        res += '<td class = "text-primary">' +name + '</td>';
+        res += '<td class = "type_exam">' +type_exam + '</td>';
+        res += '<td class = "time_start">' +time_start + '</td>';
+        res += '<td class = "time_end">' +time_end + '</td>';
+        res += '<td>' ;
+        res += '<button class = "btnModify submit-btn">Sửa</button>';
+        res += '<td>' ;
+        res += '<button class = "btnDelete submit-btn">Xóa</button>';
+        res += '</tr><br>';
+        $('#tBodyExamtable').append(res);
+        stt+=1;
+      });
+      
+      
+    }
+  )     
+  
+  // Hiển thị danh sách người dùng
+  getAllUser().then(data =>
+    {
+      $('#tBodyUserTable').empty();
+      var stt = 1;
+      data.forEach(element => {
+        var arr = String(element).split(":");
+        var id = arr[0];
+        var name = arr[1];
+        var authority = arr[2];
+        var res = "";
+        res  = '<tr id = '+id+'>';
+        res += '<th class = "stt" scope = "row">'+stt+'</th>';
+        res += '<th class = "user_id" scope = "row">'+id+'</th>';
+        res += '<td class = "text-primary">' +name + '</td>';
+        res += '<td class = "type_exam">' +authority+ '</td>';
+        res += '</tr><br>';
+        $('#tBodyUserTable').append(res);
+        stt++;
+      });
+    }
+  )     
+}
+
+
+// Ấn thêm kì thi
+function showAddExamForm() {
+  location.href="exam-form.html";
+};
+
+// Ấn chỉnh sửa kì thi
+$("#tBodyExamtable").on("click", ".btnModify", function() {
+  var $row = $(this).closest("tr");    // Find the row
+  var id_exam = $row.find(".examID").text(); // Find the text
+  console.log(id_exam);
+  localStorage.setItem('idExamEdit', id_exam);
+  location.href="modify-exam-form.html";
+});
+
+// Ấn xóa kì thi
+$("#tBodyExamtable").on("click", ".btnDelete", function() {
+  var $row = $(this).closest("tr");    // Find the row
+  var id_exam = $row.find(".examID").text(); // Find the text
+  console.log(id_exam);
+  if(confirm("Ban có chắc muốn xóa kì thi này?"))
   {
-    var stt = 1;
-    $('#tBodyExamtable').empty();
-    data.forEach(element => {
-      var id = String(element.examId);
-      var name = String(element.examName);
-      var type_exam = String(element.examType);
-      var time_start = String(element.startTime);
-      var time_end = String(element.endTime);
-      var res = "";
-      res  = '<tr id = '+id+'>';
-      res += '<th class = "stt" scope = "row">'+stt+'</th>';
-      res += '<th class = "exam_id" scope = "row">'+id+'</th>';
-      res += '<td class = "text-primary">' +name + '</td>';
-      res += '<td class = "type_exam">' +type_exam + '</td>';
-      res += '<td class = "time_start">' +time_start + '</td>';
-      res += '<td class = "time_end">' +time_end + '</td>';
-      res += '</tr><br>';
-      $('#tBodyExamtable').append(res);
-      stt+=1;
-    });
-    
-    
+    deleteExamById(id_exam).then(data=>
+      {
+        console.log(data);
+        if (data != null)
+          {
+            if(!alert("Xóa thành công!"))
+            {
+              loadData();
+            }
+          }
+      }
+    )
   }
-)     
-
-// Hiển thị danh sách người dùng
-getAllUser().then(data =>
-  {
-    $('#tBodyUserTable').empty();
-    var stt = 1;
-    data.forEach(element => {
-      var arr = String(element).split(":");
-      var id = arr[0];
-      var name = arr[1];
-      var authority = arr[2];
-      var res = "";
-      res  = '<tr id = '+id+'>';
-      res += '<th class = "stt" scope = "row">'+stt+'</th>';
-      res += '<th class = "exam_id" scope = "row">'+id+'</th>';
-      res += '<td class = "text-primary">' +name + '</td>';
-      res += '<td class = "type_exam">' +authority+ '</td>';
-      res += '</tr><br>';
-      $('#tBodyUserTable').append(res);
-      stt++;
-    });
-  }
-)     
-
-
+});
 
 
 
@@ -118,18 +169,10 @@ getAllUser().then(data =>
   //   showExamList();
   // }
   
-  // // Chỉnh sửa kỳ thi
+  // Chỉnh sửa kỳ thi
   // function editExam(examId) {
-  //   var examName = prompt("Nhập tên mới cho kỳ thi:");
-  
-  //   for (var i = 0; i < exams.length; i++) {
-  //     if (exams[i].id === examId) {
-  //       exams[i].name = examName;
-  //       break;
-  //     }
-  //   }
-  
-  //   showExamList();
+
+  //   localStorage.setItem('id_exam', i);
   // }
   
   // // Xóa kỳ thi
