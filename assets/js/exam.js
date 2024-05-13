@@ -36,12 +36,17 @@ getQuestionOfExam().then(data => {
       getExamById(item.examId).then(data1 => {
         document.querySelector(".title>h2").innerHTML = data1.examName;
       })
+      
       const content = item.content;
-      const choices = item.choices.slice(1, -1).split('\', ');
+      const choices = item.choices.slice(1, -1).split('\',');
+      const id_ques = item.questionId;
+      console.log(id_ques,"here is id ques");
+      // console.log(choices);
       const questionType = item.questionTypeId;
       let escapedArray = choices.map(item => item.replace(/'/g, ""));
+      // console.log("escape: ", escapedArray);
       if(questionType == 1){
-        createQA1(count, content, escapedArray, questionType);
+        createQA1(id_ques, count, content, escapedArray, questionType);
         createCheckAnswer(count);
         count++;
       }
@@ -56,12 +61,13 @@ getQuestionOfExam().then(data => {
         document.querySelector(".title>h2").innerHTML = data1.examName;
       })
       const content = item.content;
-      const choices = item.choices.slice(1, -1).split('\', ');
+      const choices = item.choices.slice(1, -1).split('\',');
       const questionType = item.questionTypeId;
+      const id_ques = item.questionId;
       let escapedArray = choices.map(item => item.replace(/'/g, ""));
 
       if(questionType == 2){
-        createQA2(count, content, escapedArray, questionType);
+        createQA2(id_ques, count, content, escapedArray, questionType);
         createCheckAnswer(count);
         count++;
       }
@@ -76,11 +82,12 @@ getQuestionOfExam().then(data => {
         document.querySelector(".title>h2").innerHTML = data1.examName;
       })
       const content = item.content;
-      const choices = item.choices.slice(1, -1).split('\', ');
+      const choices = item.choices.slice(1, -1).split('\',');
       const questionType = item.questionTypeId;
+      const id_ques = item.questionId;
       let escapedArray = choices.map(item => item.replace(/'/g, ""));
       if(questionType == 3){
-        createQA3(count, content, escapedArray, questionType);
+        createQA3(id_ques, count, content, escapedArray, questionType);
         createCheckAnswer(count);
         count++;
       }
@@ -156,14 +163,16 @@ submitExam = (question_length) => {
       const questions = document.querySelectorAll('.sentences');
       for(let i = 0; i<questions.length; i++){ 
         const answer = questions[i].querySelectorAll('.answer');
+        const id_ques2 = questions[i].querySelector('.id_ques').value;
         const choices = [];
         for(let j = 0; j<answer.length; j++){
           if(answer[j].checked){
             choices.push(String.fromCharCode(65+j));
           }
         }
+        console.log("id của câu hỏi ở đây:", id_ques2);
         const qa = {
-          "questionId": i+1,
+          "questionId": parseInt(id_ques2),
           "choices": "['" + choices.join("', '") + "']"
         }
         answers.push(qa);
@@ -183,6 +192,7 @@ submitExam = (question_length) => {
 
       const submitResponse = await submitData.json();
       localStorage.setItem('result', submitResponse.data.result); 
+      console.log(submitResponse);
       console.log(localStorage.getItem('result'));
       window.location.href = `result.html?id=${id}`;
     }
@@ -197,11 +207,12 @@ checkFullSelected = (question_length)=>{
 }
 
 // Trắc nghiệm 1 câu
-createQA1 = (stt, question, options, questionTypeId)=>{
-  console.log(question, "; ", options);
+createQA1 = (id_ques, stt, question, options, questionTypeId)=>{
+  // console.log(question, "; ", options);
   workplace.innerHTML += `<form class="qanda">
         <div class = "sentences" typeId = ${questionTypeId}>
           <p class="question">${stt}. ${question}</p>
+          <input type = "hidden" value="${id_ques}" class = "id_ques"">
           <input type="radio" class="answer" name = "${stt}" value="${options[0]}"> ${options[0]}<br>
           <input type="radio" class="answer" name = "${stt}" value="${options[1]}"> ${options[1]}<br>
           <input type="radio" class="answer" name = "${stt}" value="${options[2]}"> ${options[2]}<br>
@@ -212,10 +223,12 @@ createQA1 = (stt, question, options, questionTypeId)=>{
 }
 
 // Đúng sai
-createQA3 = (stt, question, options, questionTypeId)=>{
+createQA3 = (id_ques, stt, question, options, questionTypeId)=>{
+  // console.log(question, "; ", options);
   workplace.innerHTML += `<form class="qanda">
         <div class = "sentences" typeId = ${questionTypeId}> 
           <p class="question">${stt}. ${question}</p>
+          <input type = "hidden" value="${id_ques}" class = "id_ques"">
           <input type="radio"  class="answer" name = "${stt}" value="${options[0]}"> ${options[0]}<br>
           <input type="radio"  class="answer" name = "${stt}" value="${options[1]}"> ${options[1]}<br>
         </div>
@@ -224,10 +237,12 @@ createQA3 = (stt, question, options, questionTypeId)=>{
 }
 
 // Nhiều đáp án
-createQA2 = (stt, question, options, questionTypeId)=>{
+createQA2 = (id_ques, stt, question, options, questionTypeId)=>{
+  // console.log(question, "; ", options);
   workplace.innerHTML += `<form class="qanda">
         <div class = "sentences" typeId = ${questionTypeId}>
           <p class="question">${stt}. ${question}</p>
+          <input type = "hidden" value="${id_ques}" class = "id_ques"">
           <input type="checkbox" class="answer" value="${options[0]}"> ${options[0]}<br>
           <input type="checkbox" class="answer" value="${options[1]}"> ${options[1]}<br>
           <input type="checkbox" class="answer" value="${options[2]}"> ${options[2]}<br>
