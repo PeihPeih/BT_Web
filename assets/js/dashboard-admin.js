@@ -1,4 +1,4 @@
-
+let BearerJwt = 'Bearer ' + localStorage.getItem('token');
 
 async function getAllExams(){
   const response = await fetch('http://localhost:8080/admin/dashboard_admin/Exam/List', {

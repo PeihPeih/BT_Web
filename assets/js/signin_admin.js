@@ -29,7 +29,7 @@ sub_btn.addEventListener('click', async (e) => {
         console.log('Success:', responseData);
 
         localStorage.setItem('token', responseData.jwt);
-
+        window.location.href = 'dashboard_admin.html';
         // Redirect to exam
 
 
