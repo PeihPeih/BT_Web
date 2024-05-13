@@ -40,7 +40,7 @@ getQuestionOfExam().then(data => {
       const content = item.content;
       const choices = item.choices.slice(1, -1).split('\',');
       const id_ques = item.questionId;
-      console.log(id_ques,"here is id ques");
+      // console.log(id_ques,"here is id ques");
       // console.log(choices);
       const questionType = item.questionTypeId;
       let escapedArray = choices.map(item => item.replace(/'/g, ""));
@@ -170,7 +170,7 @@ submitExam = (question_length) => {
             choices.push(String.fromCharCode(65+j));
           }
         }
-        console.log("id của câu hỏi ở đây:", id_ques2);
+        // console.log("id của câu hỏi ở đây:", id_ques2);
         const qa = {
           "questionId": parseInt(id_ques2),
           "choices": "['" + choices.join("', '") + "']"
@@ -192,8 +192,8 @@ submitExam = (question_length) => {
 
       const submitResponse = await submitData.json();
       localStorage.setItem('result', submitResponse.data.result); 
-      console.log(submitResponse);
-      console.log(localStorage.getItem('result'));
+      // console.log(submitResponse);
+      // console.log(localStorage.getItem('result'));
       window.location.href = `result.html?id=${id}`;
     }
   })
