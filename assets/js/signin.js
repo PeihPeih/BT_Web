@@ -49,6 +49,8 @@ sub_btn.addEventListener('click', async (e) => {
             }
 
             localStorage.setItem('token', responseData.jwt);
+            localStorage.setItem('userId', responseData.user.userId);
+
             console.log(`Token: ${token}`)
 
             window.location.href = './index.html'

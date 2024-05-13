@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa Kỳ Thi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/exam-form.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <header id="header">
+        <div class="logo">
+            <img src="./assets/img/logo_ptit.png" alt="" onclick="location.href = 'index.html'">
+        </div>
+
+        <nav id="navbar">
+            <li>
+                <ul><a href="dashboard_admin.html">Dashboard</a></ul>
+                <ul><a href="exam-form.html">Tạo kỳ thi</a></ul>
+                <ul><a href="statistics.html">Thống kê</a></ul>
+                <ul><a href="#">Kết quả thi</a></ul>
+            </li>
+        </nav>
+
+        <div class="signin">
+            <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
+        </div>
+    </header>
+
+    <form id="exam-form">
+        <h1>Chỉnh sửa Kỳ Thi</h1>
+        <div class="form-group">
+            <label name="InsertExam">Tên kì thi:</label>
+            <textarea class="form-control" id="exam-name" rows="1" placeholder="Tên bài thi"></textarea>
+            </div>
+
+            <div class="form-group">
+            <label name="InsertNumQues">Loại bài thi:</label>
+              <select name="type_exam" id="type-exam">
+                <option value="Kiem_tra_15">Kiem_tra_15</option>
+                <option value="Kiem_tra_30">Kiem_tra_30</option>
+                <option value="Kiem_tra_45">Kiem_tra_45</option>
+                <option value="Kiem_tra_60">Kiem_tra_60</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+            <label for="time_start">Thời gian bắt đầu:</label>
+        <input type="datetime-local" id="time-start" name="time_start">
+            </div>
+            
+            <div class="form-group">
+            <label for="time_end">Thời gian kết thúc:</label>
+        <input type="datetime-local" id="time-end" name="time_end">
+            </div>
+
+
+        <div id="question-list"></div>
+
+        <div id="add-question-container">
+            <button type="button" onclick="addQuestionForm()">Thêm câu hỏi</button><br>
+        </div>
+
+        <!-- <label for="file-upload">Nhập đề thi từ file Excel:</label><br> -->
+        <!-- <input type="file" id="file-upload" name="file-upload"><br> -->
+        <div id="question-list"></div>
+
+        <!-- <button type="submit" id="btn-save">Lưu</button> -->
+        <button type="button" id="btnSave2" >Lưu</button>
+
+    </form>
+
+    <footer id="footer">
+        <p>Copyright © 2020 Học viện Công nghệ Bưu chính Viễn thông</p>
+        <p>Version: BCVT-2024.01G.23</p>
+        <p>Design by Nhóm 3</p>
+    </footer>
+
+    <script src="./assets//js/modify-exam-form.js"></script>
+</body>
+
+</html>
