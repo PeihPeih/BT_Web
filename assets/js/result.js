@@ -1,4 +1,6 @@
 
+
+
 const urlParams = new URLSearchParams(window.location.search);
 
 fetch('http://localhost:8080/question/get-all-questions', {
