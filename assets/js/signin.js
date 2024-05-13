@@ -54,6 +54,8 @@ sub_btn.addEventListener('click', async (e) => {
             window.location.href = './index.html'
         }
 
+        localStorage.setItem('token', responseData.jwt);
+        localStorage.setItem('userId', responseData.user.userId);
 
         // Redirect to exam
 
