@@ -1,6 +1,7 @@
 
 let BearerJwt = 'Bearer ' + localStorage.getItem('token');
 
+
 async function findAllExamsWithStats(){
   const response = await fetch('http://localhost:8080/admin/statistic/', {
     headers: {Authorization: BearerJwt}
