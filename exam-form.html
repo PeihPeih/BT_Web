@@ -35,14 +35,20 @@
         <label for="exam-name">Tên kỳ thi:</label><br>
         <input type="text" id="exam-name" name="exam-name"><br>
 
-        <label for="description">Mô tả:</label><br>
-        <textarea id="description" name="description"></textarea><br>
+        <!-- <label for="description">Mô tả:</label><br> -->
+        <!-- <textarea id="description" name="description"></textarea><br> -->
 
         <label for="exam-type">Loại kỳ thi:</label><br>
         <select id="exam-type" name="exam-type" onchange="handleExamType()">
             <option value="tinh gio">Tính giờ</option>
             <option value="tu do">Tự do</option>
         </select><br>
+
+
+        <div id="start-time">
+            <label for="start-time">Thời điểm bắt đầu<u></u>:</label><br>
+            <input type="datetime-local" id="start-time-input" name="start-time"><br>
+        </div>
 
         <div id="time-input">
             <label for="exam-time">Thời gian kỳ thi (phút):</label><br>
@@ -60,7 +66,7 @@
         <!-- <input type="file" id="file-upload" name="file-upload"><br> -->
         <div id="question-list"></div>
 
-        <button type="submit">Lưu</button>
+        <button class="submit-btn" type="submit">Lưu</button>
     </form>
 
     <footer id="footer">
