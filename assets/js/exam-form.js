@@ -231,8 +231,16 @@ submitBtn.addEventListener('click', async (e) => {
 
         const answers = questionForm.getElementsByClassName('text-answer')
         const choices = []
-        for (const answer of answers) {
-            choices.push(answer.value)
+        if (questionTypeId == 3) {
+            choices.push('Đúng')
+            choices.push('Sai')
+            choices.push('Null')
+            choices.push('Null')
+        }
+        else {
+            for (const answer of answers) {
+                choices.push(answer.value)
+            }
         }
 
         console.log(`choices: ${choices}`)
@@ -243,9 +251,9 @@ submitBtn.addEventListener('click', async (e) => {
 
         const questionObj = {
             content,
-            choices: JSON.stringify(choices),
+            choices: JSON.stringify(choices).replace(/"/g, "'"),
             questionTypeId,
-            correctAnswer: JSON.stringify(correctAnswer)
+            correctAnswer: JSON.stringify(correctAnswer).replace(/"/g, "'")
         }
 
         console.log(questionObj)
