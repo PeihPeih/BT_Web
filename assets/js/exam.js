@@ -33,7 +33,6 @@ getQuestionOfExam().then(data => {
   // Tạo câu hỏi loại 1
   data.forEach((item) => {
     if(item.examId == urlParams.get('id')){
-
       getExamById(item.examId).then(data1 => {
         document.querySelector(".title>h2").innerHTML = data1.examName;
       })
@@ -59,7 +58,7 @@ getQuestionOfExam().then(data => {
       const content = item.content;
       const choices = item.choices.slice(1, -1).split('\', ');
       const questionType = item.questionTypeId;
-      let escapedArray = choices.map(item => convertQuestion(item));
+      let escapedArray = choices.map(item => item.replace(/'/g, ""));
 
       if(questionType == 2){
         createQA2(count, content, escapedArray, questionType);
