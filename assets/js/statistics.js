@@ -55,7 +55,7 @@ getAllNameExam().then(data =>
           // });
           var tongSolanThamGia = data.tongSolanThamGia;
           document.getElementById("tongSolanThamGia").innerHTML = tongSolanThamGia;
-          document.getElementById("tyLeHoanThanh").innerHTML = tyLeHoanThanh;
+          document.getElementById("tyLeHoanThanh").innerHTML = tyLeHoanThanh + "%";
           document.getElementById("diemtb").innerHTML = diemtb;
           // document.getElementById("phanPhoiDiem").innerHTML = strphanPhoiDiem;
           draw(phanPhoiDiem);
@@ -76,7 +76,7 @@ getAllNameExam().then(data =>
           // });
           var tongSolanThamGia = data.tongSolanThamGia;
           document.getElementById("tongSolanThamGia").innerHTML = tongSolanThamGia;
-          document.getElementById("tyLeHoanThanh").innerHTML = tyLeHoanThanh;
+          document.getElementById("tyLeHoanThanh").innerHTML = tyLeHoanThanh + "%";
           document.getElementById("diemtb").innerHTML = diemtb;
           // document.getElementById("phanPhoiDiem").innerHTML = strphanPhoiDiem;
           draw(phanPhoiDiem);
