@@ -38,10 +38,9 @@ getQuestionOfExam().then(data => {
         document.querySelector(".title>h2").innerHTML = data1.examName;
       })
       const content = item.content;
-      const choices = item.choices.slice(1, -1).split(', ');
+      const choices = item.choices.slice(1, -1).split('\', ');
       const questionType = item.questionTypeId;
-      let escapedArray = choices.map(item => item.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
-
+      let escapedArray = choices.map(item => item.replace(/'/g, ""));
       if(questionType == 1){
         createQA1(count, content, escapedArray, questionType);
         createCheckAnswer(count);
@@ -58,9 +57,9 @@ getQuestionOfExam().then(data => {
         document.querySelector(".title>h2").innerHTML = data1.examName;
       })
       const content = item.content;
-      const choices = item.choices.slice(1, -1).split(', ');
+      const choices = item.choices.slice(1, -1).split('\', ');
       const questionType = item.questionTypeId;
-      let escapedArray = choices.map(item => item.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+      let escapedArray = choices.map(item => convertQuestion(item));
 
       if(questionType == 2){
         createQA2(count, content, escapedArray, questionType);
@@ -78,10 +77,9 @@ getQuestionOfExam().then(data => {
         document.querySelector(".title>h2").innerHTML = data1.examName;
       })
       const content = item.content;
-      const choices = item.choices.slice(1, -1).split(', ');
+      const choices = item.choices.slice(1, -1).split('\', ');
       const questionType = item.questionTypeId;
-      let escapedArray = choices.map(item => item.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
-
+      let escapedArray = choices.map(item => item.replace(/'/g, ""));
       if(questionType == 3){
         createQA3(count, content, escapedArray, questionType);
         createCheckAnswer(count);
@@ -155,7 +153,6 @@ submitExam = (question_length) => {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const id = urlParams.get('id'); // Exam id
-      const userId = localStorage.getItem('userId');
       const answers = [];
       const questions = document.querySelectorAll('.sentences');
       for(let i = 0; i<questions.length; i++){ 
@@ -173,7 +170,6 @@ submitExam = (question_length) => {
         answers.push(qa);
       }
       const data = {
-        "userId": parseInt(userId),
         "examId": parseInt(id),
         "answers": answers
       }
