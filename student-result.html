@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tra cứu điểm sinh viên</title>
     <link rel="stylesheet" href="./assets/css/student-result.css">
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -27,7 +27,7 @@
         </nav>
 
         <div class="signin">
-            <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng nhập</a>
+            <a href="signin.html" onclick="return signOut()"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
         </div>
     </header>
 
@@ -36,7 +36,7 @@
         <form id="search-form">
             <label for="student-id">Nhập mã sinh viên:</label>
             <input type="text" id="student-id" name="student-id" required>
-            <button class="search-btn" type="submit">Tra cứu</button>
+            <button id="search-btn" type="button">Tra cứu</button>
         </form>
         <div id="result"></div>
     </div>

@@ -1,5 +1,12 @@
+function signOut() {
+  localStorage.setItem('token', null);
+  localStorage.setItem('userId', null);
+  return true;
+}
+
 async function getAllExam(){
   const response = await fetch('http://localhost:8080/exam/get-all-exams', {
+
 
     headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -13,6 +20,7 @@ let url = new URL(window.location.href);
 let params = new URLSearchParams(url.search);
 
  getAllExam().then(data => {
+  console.log(data)
     const typeExam = new Set();
     for (let i = 0; i<data.length;i++){
       typeExam.add(data[i].examType);
@@ -25,7 +33,6 @@ let params = new URLSearchParams(url.search);
         createPageBtn(i+1);
       }
       const examForm = document.querySelectorAll('.container');
-      console.log(examForm[0].classList.add('active'));
       changeNumPage(examForm); 
     }
     else{
@@ -33,6 +40,7 @@ let params = new URLSearchParams(url.search);
       
     }
     createTypeDroplist(typeExam);
+    editNumOfQuestion(0, document.querySelectorAll('.container'));
   });
 
 
@@ -136,12 +144,11 @@ searchBtn.addEventListener('click', (event) => {
     }
   const queryString = new URLSearchParams(obj).toString();
   const searchUrl = 'index.html?'+queryString;
-  
+
   if (type == "Tất cả"){
     window.location.href = 'index.html';
   }
   else if (type != ""){
-    console.log(1);
     const examForm = document.querySelectorAll('.container');
     examForm.forEach(item => {addClass(item, 'passive'), removeClass(item, 'active')});
 
@@ -151,9 +158,8 @@ searchBtn.addEventListener('click', (event) => {
 });
 
 async function getExamAllowQuery(type) {
-  console.log(1);
   const response1 = await fetch(`http://localhost:8080/exam/exam-type/${type}`, {
-    headers: {Authorization: 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjQiLCJpYXQiOjE3MTQ5Mjk5MjUsInJvbGVzIjoiVVNFUiJ9.YVZ2rCw4LlEdTIElnbfaZ2D3btyd_qviT2SaO3re2r7nBaKDF6kLp7CyxzYHvfDVuLyMo40nDfjfkC_SJOXu_pEtGnAdpkFiMsy-qNjYWkkFFsA3YPqtf2LSGAGKeKM96thzC-oEHzCd1-Ikm8VVpngUgmlB17MxGjsqMWMgpbZnx5ni90Lu_wcYjwCD7fDrEIpITDIihuvgNBhS_l4iwxmy9jfuqJh-wn85TeR_dJyUgbwD2gRFQeaktJ8K2sKWhwQ4rCtHYDNIdhavde11SHTS91bh-f9GtCDzA2q9zkb3PtmjptlveFWvjkOsYdD5jNXDvdsj4x57dCPY-wDIig'}
+    headers: {Authorization: `Bearer ${localStorage.getItem('token')}` }
   });
   const data = await response1.json();
   for (let i = 0; i<data.length;i++){
@@ -166,3 +172,31 @@ async function getExamAllowQuery(type) {
    changeNumPage(examForm); 
   // Now you have data from both APIs
 }
+
+async function getQuestionOfExam(){
+  const response = await fetch('http://localhost:8080/question/get-all-questions', {
+
+
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }
+  });
+  const data = await response.json();
+  return data;
+}
+
+editNumOfQuestion = (num, examForm) => {
+  getQuestionOfExam().then(data => { 
+    console.log(data);
+    examForm.forEach(item => {
+      let num = 0;
+      let examId = item.getAttribute('examId');
+      data.forEach((item) => {
+        if(item.examId == examId){
+          num++;
+        }
+      })
+      item.querySelector('.question').innerHTML = `${num} câu hỏi`;
+    })
+  }
+)}

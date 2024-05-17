@@ -1,5 +1,11 @@
 let BearerJwt = 'Bearer ' + localStorage.getItem('token');
 
+function signOut() {
+  localStorage.setItem('token', null);
+  localStorage.setItem('userId', null);
+  return true;
+}
+
 async function getAllExams(){
   const response = await fetch('http://localhost:8080/admin/dashboard_admin/Exam/List', {
     headers: {Authorization: BearerJwt}

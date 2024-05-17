@@ -1,4 +1,9 @@
-
+function signOut() {
+    localStorage.setItem('token', null);
+    localStorage.setItem('userId', null);
+    return true;
+  }
+  
 var idExamEdit = localStorage.getItem('idExamEdit');
 
 $(document).ready(function(){

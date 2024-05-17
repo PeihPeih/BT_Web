@@ -50,11 +50,14 @@ sub_btn.addEventListener('click', async (e) => {
 
             localStorage.setItem('token', responseData.jwt);
             localStorage.setItem('userId', responseData.user.userId);
+
             console.log(`Token: ${token}`)
 
             window.location.href = './index.html'
         }
 
+        localStorage.setItem('token', responseData.jwt);
+        localStorage.setItem('userId', responseData.user.userId);
 
         // Redirect to exam
 
@@ -62,4 +65,6 @@ sub_btn.addEventListener('click', async (e) => {
     } catch (error) {
         console.error('Error:', error);
     }
+
+    window.location.href = 'index.html';
 })
