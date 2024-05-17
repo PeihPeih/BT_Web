@@ -14,6 +14,7 @@ async function getQuestionOfExam(){
   const response = await fetch('http://localhost:8080/question/get-all-questions', {
 
 
+
     headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     }
@@ -24,6 +25,7 @@ async function getQuestionOfExam(){
 
 async function getExamById(id){
   const response = await fetch(`http://localhost:8080/exam/${id}`, {
+
 
 
     headers: {
@@ -114,9 +116,13 @@ getQuestionOfExam().then(data => {
 
 // Time counter
 var counts =  urlParams.get('time')*60;
+var counts =  urlParams.get('time')*60;
 const interval = 1000; // 1 giây
 
 function counter() {
+    counts--; // Tăng biến đếm lên mỗi lần hàm được gọi
+    timer.innerHTML = convertSecond2Minutes(counts);
+    if (counts === 0){
     counts--; // Tăng biến đếm lên mỗi lần hàm được gọi
     timer.innerHTML = convertSecond2Minutes(counts);
     if (counts === 0){
@@ -157,6 +163,7 @@ checkSelectedAnswer = ()=>{
 submitExam = (question_length) => {
   const submit_btn = document.querySelector(".submit-btn");
   const form = document.querySelector("#form");
+  submit_btn.addEventListener('click', async (event) => {
   submit_btn.addEventListener('click', async (event) => {
     event.preventDefault();
     if(checkFullSelected(question_length)) {
@@ -217,6 +224,7 @@ createQA1 = (id_ques, stt, question, options, questionTypeId)=>{
   // console.log(question, "; ", options);
   workplace.innerHTML += `<form class="qanda">
         <div class = "sentences" typeId = ${questionTypeId}>
+        <div class = "sentences" typeId = ${questionTypeId}>
           <p class="question">${stt}. ${question}</p>
           <input type = "hidden" value="${id_ques}" class = "id_ques"">
           <input type="radio" class="answer" name = "${stt}" value="${options[0]}"> ${options[0]}<br>
@@ -233,6 +241,7 @@ createQA3 = (id_ques, stt, question, options, questionTypeId)=>{
   // console.log(question, "; ", options);
   workplace.innerHTML += `<form class="qanda">
         <div class = "sentences" typeId = ${questionTypeId}> 
+        <div class = "sentences" typeId = ${questionTypeId}> 
           <p class="question">${stt}. ${question}</p>
           <input type = "hidden" value="${id_ques}" class = "id_ques"">
           <input type="radio"  class="answer" name = "${stt}" value="${options[0]}"> ${options[0]}<br>
@@ -247,6 +256,7 @@ createQA2 = (id_ques, stt, question, options, questionTypeId)=>{
   // console.log(question, "; ", options);
   workplace.innerHTML += `<form class="qanda">
         <div class = "sentences" typeId = ${questionTypeId}>
+        <div class = "sentences" typeId = ${questionTypeId}>
           <p class="question">${stt}. ${question}</p>
           <input type = "hidden" value="${id_ques}" class = "id_ques"">
           <input type="checkbox" class="answer" value="${options[0]}"> ${options[0]}<br>
@@ -260,6 +270,48 @@ createQA2 = (id_ques, stt, question, options, questionTypeId)=>{
 
 createCheckAnswer = (stt) => {
   helpplace.innerHTML += `<button class="checkans">${stt}</button>`
+}
+
+// Chọn phần
+changePart = (arrQuestion)=>{
+  const partBtns = document.querySelectorAll(".part");
+  partBtns.forEach((partBtn) => {
+    partBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      // Chuyển màu nút đc chọn
+      partBtns.forEach(partBtn => {
+        partBtn.classList.remove('selected-part');
+      });
+
+      partBtn.classList.add('selected-part');
+
+      const part  = document.querySelector(".selected-part").innerHTML.split(" ")[1];''
+      showQuestionByPart(part, arrQuestion);
+    });
+  });
+}
+
+showQuestionByPart = (part, arrQuestion) => { 
+  arrQuestion.forEach(item => {
+      addClass(item, 'passive');
+      removeClass(item, 'active');
+      if (item.getAttribute('typeid') == part){
+        addClass(item, 'active');
+      }
+    });
+}
+
+removeClass = (item, class_name) => {
+  if(item.classList.contains(class_name)){
+      item.classList.remove(class_name);
+    }
+}
+
+addClass = (item, class_name) => {
+  if(!item.classList.contains(class_name)){
+    item.classList.add(class_name);
+  }
 }
 
 // Chọn phần
