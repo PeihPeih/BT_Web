@@ -1,5 +1,10 @@
 let BearerJwt = 'Bearer ' + localStorage.getItem('token');
-
+function signOut() {
+    localStorage.setItem('token', null);
+    localStorage.setItem('userId', null);
+    return true;
+  }
+  
 async function findAllAnswerSheetsByUserId(id){
   const response = await fetch('http://localhost:8080/admin/statistic/student/'+id, {
     headers: {Authorization: 'Bearer ' + localStorage.getItem('token') }

@@ -1,3 +1,9 @@
+function signOut() {
+    localStorage.setItem('token', null);
+    localStorage.setItem('userId', null);
+    return true;
+  }
+  
 function numberToLetter(number) {
     const letter = String.fromCharCode(65 + number);
     return letter;

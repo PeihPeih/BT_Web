@@ -1,3 +1,9 @@
+function signOut() {
+  localStorage.setItem('token', null);
+  localStorage.setItem('userId', null);
+  return true;
+}
+
 async function getAllExam(){
   const response = await fetch('http://localhost:8080/exam/get-all-exams', {
 

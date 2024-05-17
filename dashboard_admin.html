@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" href="assets\css\dashboard-admin.css">
     <link rel="stylesheet" href="./assets/css/header.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 </head>
 <body>
   <!--Header-->
@@ -26,7 +27,7 @@
     </nav>
 
     <div class="signin">
-      <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
+      <a href="signin.html" onclick="return signOut()"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
     </div>
   </header>
 
@@ -58,7 +59,7 @@
 
   <div id="user-section" class="section1">
     <h2>Quản lý danh sách người dùng</h2>
-    <!-- <button onclick="showAddUserForm()" class='submit-btn'>Thêm mới</button> -->
+    <button onclick="showAddUserForm()" class='submit-btn'>Thêm mới</button>
     <div style = "height:300px; width: 95%; overflow-y:scroll;">
       <table id="user-table">
         <thead>
@@ -67,8 +68,8 @@
             <th>ID</th>
             <th>Tên người dùng</th>
             <th>Quyền hạn</th>
-            <!-- <th>Chỉnh sửa</th>
-            <th>Xóa</th> -->
+            <th>Sửa mật khẩu</th>
+            <th>Xóa</th>
           </tr>
         </thead>
         <tbody id="tBodyUserTable">
@@ -103,10 +104,10 @@
   <script src="assets\js\dashboard-admin.js"></script>
 
   <!-- Modal Bai Thi -->
-  <div id="modalBaiThi" class="modal">
+  <!-- <div id="modalBaiThi" class="modal"> -->
 
     <!-- Modal content -->
-    <div class="modal-content">
+    <!-- <div class="modal-content">
       <span class="close">&times;</span>
       <div class="modal-body">
   
@@ -136,8 +137,92 @@
           <input type="datetime-local" id="time_end" name="time_end">
               </div>
     </div>
+  </div> -->
+  
+  <!-- Modal Nguoi dung -->
+  <!-- <div id="modalThemNguoiDung" class="modal"> -->
+  <div class="modal fade" id="modalThemNguoiDung" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Thêm người dùng mới</h2>
+      </div>
+      <div class="modal-body">
+  
+          <!-- <form id="form" action="" method="get"> -->
+              <div class="form-group">
+              <label name="Insert_username" style="font-weight: bold;">Tên đăng nhập:</label><br>
+              <textarea class="form-control" id="mdl_username" rows="1" placeholder="tên đăng nhập" required></textarea>
+              </div><br>
+  
+              <div class="form-group">
+              <label name="Insert_authority" style="font-weight: bold;">Quyền hạn:</label><br>
+                <select name="mdl_type_authority" id="mdl_type_authority">
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="USER">USER</option>
+                </select>
+              </div><br>
+  
+              <div class="form-group">
+              <label for="password" style="font-weight: bold;">Mật khẩu:</label><br>
+              <input type="password" id="password" name="password" required>
+              </div><br>
+              
+              <div class="form-group">
+              <label for="re_password" style="font-weight: bold;">Nhập lại mật khẩu:</label><br>
+              <input type="password" id="re_password" name="re_password" required>
+              </div><br>
+
+              <button type="button" onclick="addUser()" class="submit-btn" style=" text-align: right;">Thêm mới</button>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
   </div>
-   
+
+  <div class="modal fade" id="modalSuaMatKhau" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Sửa mật khẩu</h2>
+      </div>
+      <div class="modal-body">
+  
+          <!-- <form id="form" action="" method="get"> -->
+              <div class="form-group">
+              <label name="Insert_username" style="font-weight: bold;">Tên đăng nhập:</label><br>
+              <textarea class="form-control" id="mdl_username_sua" rows="1" placeholder="tên đăng nhập" style="pointer-events:none;"></textarea>
+              </div><br>
+  
+              <div class="form-group">
+              <label name="Insert_authority" style="font-weight: bold;">Quyền hạn:</label><br>
+                <select name="mdl_type_authority" id="mdl_authority_sua" disabled>
+                  <option value="USER">USER</option>
+                  <option value="ADMIN">ADMIN</option>
+                </select>
+              </div><br>
+  
+              <div class="form-group">
+              <label for="password" style="font-weight: bold;">Mật khẩu:</label><br>
+              <input type="password" id="password_sua" name="password" required>
+              </div><br>
+              
+              <div class="form-group">
+              <label for="re_password" style="font-weight: bold;">Nhập lại mật khẩu:</label><br>
+              <input type="password" id="re_password_sua" name="re_password" required>
+              </div><br>
+
+              <button type="button" onclick="changePassword()" class="submit-btn" style=" text-align: right;">Lưu thay đổi</button>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 <footer id="footer">
   <p>Copyright © 2020 Học viện Công nghệ Bưu chính Viễn thông</p>

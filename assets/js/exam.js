@@ -1,3 +1,9 @@
+function signOut() {
+  localStorage.setItem('token', null);
+  localStorage.setItem('userId', null);
+  return true;
+}
+
 const workplace = document.querySelector(".qanda");
 const helpplace = document.querySelector(".help_wrapper>.num_qa");
 const timer = document.querySelector("#time");

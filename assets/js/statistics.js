@@ -1,5 +1,10 @@
 
 let BearerJwt = 'Bearer ' + localStorage.getItem('token');
+function signOut() {
+  localStorage.setItem('token', null);
+  localStorage.setItem('userId', null);
+  return true;
+}
 
 
 async function findAllExamsWithStats(){
