@@ -42,6 +42,60 @@ async function deleteQuestionById(id){
   const data = await response.text();
   return data;
 }
+async function registerUser (data){
+  const response = await fetch('http://localhost:8080/auth/register', {
+    method: 'POST',  
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token'),
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  if (!response.ok) {
+    return 'Network error!';
+  }
+  return 'Đăng kí thành công!';
+}
+
+async function registerAdmin(data){
+  const response = await fetch('http://localhost:8080/auth/registerAdmin', {
+    method: 'POST',  
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token'),
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  if (!response.ok) {
+    return 'Network error!';
+  }
+  return 'Đăng kí thành công!';
+}
+
+async function deleteUser(id){
+  const response = await fetch('http://localhost:8080/auth/deleteUser/'+id, {
+    method: 'DELETE',  
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token')
+    },
+  });
+  if (!response.ok) {
+    return 'Network error!';
+  }
+  return 'Xóa thành công!';
+}
+
+async function updateUserPassword(data){
+  const response = await fetch('http://localhost:8080/auth/updatePassword', {
+    method: 'PUT',  
+    headers: {Authorization: 'Bearer ' + localStorage.getItem('token'),
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  if (!response.ok) {
+    return 'Network error!';
+  }
+  return 'Đổi mật khẩu thành công!';
+}
+
 $(document).ready(function(){
   loadData();
 });
@@ -92,8 +146,12 @@ function loadData() {
         res  = '<tr id = '+id+'>';
         res += '<th class = "stt" scope = "row">'+stt+'</th>';
         res += '<th class = "user_id" scope = "row">'+id+'</th>';
-        res += '<td class = "text-primary">' +name + '</td>';
-        res += '<td class = "type_exam">' +authority+ '</td>';
+        res += '<td class = "name">' +name + '</td>';
+        res += '<td class = "authority">' +authority+ '</td>';
+        res += '<td>' ;
+        res += '<button class = "btnModify submit-btn">Sửa</button>';
+        res += '<td>' ;
+        res += '<button class = "btnDelete submit-btn">Xóa</button>';
         res += '</tr><br>';
         $('#tBodyUserTable').append(res);
         stt++;
@@ -182,9 +240,131 @@ async function async_fun (id) {
   console.log(second_promise);
 }
 
+function showAddUserForm() {
+  $("#modalThemNguoiDung").modal();
+  console.log("Open");
+}
 
+function addUser(){
+  var username_add = document.getElementById("mdl_username").value;
+  var authority_add =  document.getElementById("mdl_type_authority").value;
+  var pass_add = document.getElementById("password").value;
+  var repass_add = document.getElementById("re_password").value;
+  console.log(username_add, authority_add, pass_add, repass_add);
 
+  if (username_add == "" || 
+    authority_add == "" ||
+    pass_add == "" ||
+    repass_add == "")
+  {
+    alert("Bạn chưa điền đủ thông tin");
+  }
+  else
+  {
+    if (pass_add != repass_add)
+    {
+      alert("Mật khẩu không trùng khớp");
+    }
+    else
+    {
+      data = {
+        username: username_add,
+        password: pass_add
+      }
+      if (authority_add == "ADMIN")
+      {
+        registerAdmin(data).then(response =>
+        {
+          console.log(response);
+          if(!alert("Bạn đã thêm tài khoản thành công!"))
+          {
+            $("#modalThemNguoiDung").hide();
+          }
+          loadData();
+        })
+      }
+      else
+      {
+        registerUser(data).then(response =>
+        {
+          console.log(response);
+          if(!alert("Bạn đã thêm tài khoản thành công!"))
+          {
+            $("#modalThemNguoiDung").hide();
+            loadData();
+          }
+        })
+      }
+      
+    }
+  }
+  
+}
 
+function changePassword() {
+  var username_update = document.getElementById("mdl_username_sua").value;
+  var pass_update = document.getElementById("password_sua").value;
+  var repass_update = document.getElementById("re_password_sua").value;
+  if (
+    pass_update == "" ||
+    repass_update == "")
+  {
+    alert("Bạn chưa điền đủ thông tin");
+  }
+  else
+  {
+    if (pass_update != repass_update)
+    {
+      alert("Mật khẩu không trùng khớp");
+    }
+    else
+    {  
+      data = {
+        username: username_update,
+        password: pass_update
+      }
+      updateUserPassword(data).then(response =>
+        {
+          console.log(response);
+          if(!alert("Bạn đã thay đổi mật khẩu thành công!"))
+          {
+            $("#modalSuaMatKhau").hide();
+            loadData();
+          }
+        })
+    }
+  }
+}
+
+// Ấn chỉnh sửa mật khẩu người dùng
+$("#tBodyUserTable").on("click", ".btnModify", function() {
+  var $row = $(this).closest("tr");    // Find the row
+  var id_user = $row.find(".user_id").text(); // Find the text
+  var name_user = $row.find(".name").text(); // Find the text
+  var authority_user = $row.find(".authority").text(); // Find the text
+  console.log(id_user);
+  $('#mdl_username_sua').val(name_user);
+  $('#mdl_authority_sua').val(authority_user);
+  $("#modalSuaMatKhau").modal("show");
+});
+
+// Ấn xóa người dùng
+$("#tBodyUserTable").on("click", ".btnDelete", function() {
+  var $row = $(this).closest("tr");    // Find the row
+  var id_user = $row.find(".user_id").text(); // Find the text
+  console.log(id_user);
+  if(confirm("Ban có chắc muốn xóa tài khoản này?"))
+  {
+    deleteUser(id_user).then(response =>
+      {
+        console.log(response);
+        if(!alert("Bạn đã xóa tài khoản thành công!"))
+        {
+          loadData();
+        }
+      })
+  }
+});
 
 
 
