@@ -175,3 +175,11 @@ main .help_wrapper{
     color: #ad171c;
     font-weight: bold;
 }
+
+.passive{
+  display: none;
+}
+
+.active{
+  display:block;
+}

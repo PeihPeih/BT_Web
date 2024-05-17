@@ -21,28 +21,12 @@
                 <label for="password_admin">Password:</label>
                 <input type="password" id="password_admin" name="password_admin" required>
             </div>
-            <button type="submit" class="sub-btn" onclick="check_login()">Login</button>
+            <button type="submit" class="sub-btn">Login</button>
             <a href="register.html">Register</a>
             <a href="signin.html">Login for student</a>
         </form>
     </div>
     <script src="./assets/js/signin_admin.js"></script>
-    <!-- <script>
-        function check_login() {
-            let data = window.location.search;
-            let params = new URLSearchParams(data);
-            let admin_name = params.get("username_admin");
-            let admin_pass = params.get("password_admin");
-            console.log(admin_name);
-            console.log(admin_pass);
-            if (admin_name == "ad" && admin_pass == "123") 
-            {
-                window.location = "dashboard_admin.html";
-            } else {
-                alert("Invalid username or password. Please try again.");
-            }
-        }
-    </script> -->
 </body>
 
 </html>

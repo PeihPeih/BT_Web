@@ -17,6 +17,8 @@
             color: #ff0000; /* Đỏ */
         }
 
+        
+
         .result-container {
             /* width: 300px; */
             margin-left: auto;
@@ -24,15 +26,18 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
         }
 
         h2 {
             margin-bottom: 20px;
+            text-align: center;
         }
 
-        .result-info p {
+        
+
+        .result>p{
             margin-bottom: 10px;
+            text-align: center;
         }
 
         .result-info span {
@@ -45,7 +50,6 @@
             padding-top: 20px;
         }
         .review-answer {
-            background-color: #e46306;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -77,28 +81,22 @@
         </nav>
     
         <div class="signin">
-          <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng nhập</a>
+          <a href="signin.html"><i class="fa-solid fa-user" style="margin-right:10px "></i>Đăng xuất</a>
         </div>
       </header>
 
       <div class="result-container">
-        <h2>Kết quả:
+        <h2>Kết quả
         </h2>
         <div class="result">
-            <p>Bạn trả lời đúng <strong id="correct-answers"></strong> trên tổng số <strong id="total-questions"></strong> câu hỏi.</p>
-            <p>Điểm số: <strong id="score"></strong></p>
+            <p><strong id="score"></strong></p>
         </div>
-        <!-- <button onclick="showAnswers()" class="review-answer">Xem đáp án</button>
-        <div id="answers" class="review-answer" style="display: none;"> -->
+        <button  class="review-answer-btn">Xem đáp án</button>
+        <div id="answers" class="review-answer">
             <!-- Đoạn mã JavaScript sẽ điền vào đây -->
         <!-- </div> -->
-    </div>
-        <form id="form">
-          <div class="qanda">
-  
-          </div>
-          
-        </form>
+        </div>
+      </div> 
         
       <footer id="footer">
         <p>Copyright © 2020 Học viện Công nghệ Bưu chính Viễn thông</p>
